@@ -2,7 +2,7 @@
 # Get ordinal numbers (eg; '1st', '2nd', '3rd', '10th', etc)
 def ordinal(num, include=True):
     """
-    include = True -> include both number and suffix.
+    include = True -> include number with suffix. (False -> return suffix). 
             = 'str' -> include string between the number and it's suffix.
     """
     str_num, suffix = f"{num}", 'th'
