@@ -1,6 +1,10 @@
 
-# How to present numbers with their as ordinal
+# Get ordinal numbers (eg; '1st', '2nd', '3rd', '10th', etc)
 def ordinal(num, include=True):
+    """
+    include = True -> include both number and suffix.
+            = 'str' -> include string between the number and it's suffix.
+    """
     str_num, suffix = f"{num}", 'th'
 
     if not 11 <= abs(num)%100 <= 13:
@@ -14,4 +18,12 @@ def ordinal(num, include=True):
 
     return str_num + suffix
 
+# Long numbers with commas (eg; "1,000" , "98,765,432", etc)
+def commas(num, r=0):    
+    # r = int -> round to decimal places
+    num = float(f'%.{r}f'%(num))
+
+    if num.is_integer():
+        num = int(num)
     
+    return f'{num:,}'
