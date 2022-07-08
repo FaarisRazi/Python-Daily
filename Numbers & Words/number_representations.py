@@ -35,21 +35,43 @@ def commas(num, r=0):
 # Convert numbers to words via digits-to-string mapping,
 # with given IDs-list (str_ids) of string-values to map to your number's digits
 def map_str(x, str_ids = {}, join=''):
-    # str_ids = {int: str ...} -> Integer-key to user's string/character
-    strx = str(x)
-    type_error = f"Invalid {type(x)} input, only numbers allowed as text or as is."
+    # str_ids = {int, float : str ...} -> Numeric-key to user's string/character
+    typeX_error = f"Invalid {type(x)} input, only numbers allowed as text or as is."
+    typeIDs_error = f"Invalid {type(x)} as IDs container, only lists/strings/dictionaries allowed."
+    lenID_error = "Invalid IDs-list, Count of IDs < Count of your number's unique digits."
     
+    strx = str(x).strip()
+    
+    # ------- x: Number Validation
+    if strx.isdigit():
+        pass
+    elif strx.replace('.','').isdigit():
+        return '.'.join(map(map_str, strx.split('.'), str_ids, join))
+    else:
+        raise type_err
+    
+    # ------- IDs-list: Assign/Validation
     if not str_ids:
         alphabets = 'abcdefghijklmnopqrstuvwxyz'
         str_ids = dict(enumerate(alphabets, 1))
-    
-    if strx.isdigit():
+        
+    elif type(str_ids) == dict:
         pass
     
-    elif strx.replace('.','').isdigit():
-        return '.'.join(map(map_str, strx.split('.'), str_ids, join))
-    
-    else:
-        raise type_error
+    elif type(str_ids) in {list, str}:
+#         str_ids = set(str_ids)
+        n_digits = len(set(strx))
+        n_ids = len(str_ids)
+        
+        if n_ids != n_digits:
+            if n_ids < n_digits:
+                raise lenID_error
+                
+            print(f"count of IDs ({n_ids}) > count of your number's unique digits ({n_digits})"+
+                  f",\nusing the first {n_digits} digits from your IDs-list.")
+            
+            str_ids = {n:s for n,s in zip(strx, str_ids[:n_digits])}
+    else: 
+        raise typeIDs_error
 
     return join.join(map( str_ids.get, map(int, strx) ))
