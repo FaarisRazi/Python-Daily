@@ -3,9 +3,10 @@
 def ordinal(num, include=True):
     """
     include = True -> include number with suffix. (False -> return suffix). 
-            = 'str' -> include string between the number and it's suffix.
+            = "str" -> include this string between the number and it's suffix.
     """
     str_num, suffix = f"{num}", 'th'
+    # For < Python 3.6: str_num = "{}".format(num)
 
     if not 11 <= abs(num)%100 <= 13:
         suffix = {1:'st', 2:'nd', 3:'rd'}.get(num%10, 'th')
@@ -18,12 +19,13 @@ def ordinal(num, include=True):
 
     return str_num + suffix
 
+
 # Long numbers with commas (eg; "1,000" , "98,765,432", etc)
 def commas(num, r=0):    
-    # r = int -> round to decimal places
+    # r = int -> round to 'r' decimal places
     num = float(f'%.{r}f'%(num))
 
     if num.is_integer():
         num = int(num)
     
-    return f'{num:,}'
+    return f'{num:,}' # For < Python 3.6: "{:,}".format(num)
