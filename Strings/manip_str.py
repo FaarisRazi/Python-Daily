@@ -14,3 +14,5 @@ def mreplace(text, to_replace):
         
     return text
 
+#Get sub-string contained within brackets in text
+str_in_bracs = lambda s: re.search(r"\(([A-Za-z0-9_]+)\)", s)
