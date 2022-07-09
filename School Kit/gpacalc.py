@@ -1,4 +1,5 @@
-uofm = {'A+':4.5,'A':4,'B+':3.5,'B':3,'C+':2.5,'C':2,'D':1,'F':0}
+# A university's grading-scale/evaluation of letter Grades and their credit-values
+uofm = {'A+':4.5,'A':4,'B+':3.5,'B':3,'C+':2.5,'C':2,'D':1,'F':0} # (My University's)
 
 def gpa(grades, evals = uofm, all_creds = 3):
     course_creds = [all_creds]
