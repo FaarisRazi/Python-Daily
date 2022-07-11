@@ -2,8 +2,11 @@
 # Retrieve unique lists/tuples from a nested-list (eg; [[1,2], [2,1]] => [1,2])
 unique_lists = lambda nested_list: list(set([tuple(sorted(i)) for i in nested_list]))
 
-# Make a random data-structure (list/tuple.. etc) containg random characters/numbers
+# Get a random data-structure/"basket" (list/tuple.. etc) containing random characters/numbers
 def rand_basket(items=5, basket=any, nest=0, nest_type=any):
+    # items = int -> Number of items in your "basket"
+    # basket = any/list/tuple/set/dict -> data-structure type of your basket or 'any' for any type
+    # nest = (later)
     from random import choice, randint, random
     from string import printable
     
