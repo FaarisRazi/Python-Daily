@@ -7,6 +7,7 @@ def rand_basket(items=5, basket=any, nest=0, nest_type=any):
     # items = int -> Number of items in your "basket"
     # basket = any/list/tuple/set/dict -> data-structure type of your basket or 'any' for any type
     # nest = (later)
+    # nest_type = (later)
     from random import choice, randint, random
     from string import printable
     
