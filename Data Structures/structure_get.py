@@ -14,7 +14,7 @@ def rand_basket(items=5, basket=any, nest=0, nest_type=any):
     data_structures = {list, tuple, set, dict, str}
     str_inputs = {'list', 'tuple', 'set', 'dict', 'str'}
     random_chrs = list(printable)
-    max_int = 7512061515276834201
+    max_int = 9223372036854775807 # From sys.maxsize ('sys' library)
     
     if basket in {any, 'any'}:
         basket = choice([list, tuple, set, dict])
