@@ -12,13 +12,13 @@ def gpa(grades, evals = uofm, all_creds = 3):
             if all_creds.is_digit() or all_creds.replace('.','').is_digit():
                 all_creds = float(all_creds)
             else:
-                raise all_creds_error
+                raise ValueError(all_creds_error)
         
         if type(all_creds) == int or type(all_creds) == float:
             if all_creds < 0:
-                raise all_creds_error
+                raise ValueError(all_creds_error)
         else: # all_creds is 'bool' (True) or other data-type
-            raise all_creds_error
+            raise ValueError(all_creds_error)
 
         course_creds *= len(grades)
 
