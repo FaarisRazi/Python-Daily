@@ -76,16 +76,75 @@ def map_str(x, str_ids = {}, join=''):
 
     return join.join(map( str_ids.get, map(int, strx) ))
 
-def num2words(x):
-    singles = dict(enumerate(['one','two','three','four',
-                         'five','six','seven','eight','nine'],1))
+def num2words(num, sep='and'):
 
-    unique_tens = {10:'ten', 11:'eleven', 12:'twelve'}
+    x = f'{num:,}' # For Python < 3.6: "{:,}".format(20345678)
+    commas_left = x.count(',')
+    sep = f' {sep} '
 
-    lvl2 = {20:'twenty', 30:'thirty', 40: 'fourty', 50:'fifty', 
-            60:'sixty', 70:'seventy', 80:'eighty', 90:'ninety'}
+    # if not commas_left:
+    # def less_than_thousand(x):
 
-    tens = {**unique_tens, 
-            **{10+i//10:j[:-2]+'teen' for i,j in lvl2.items() if i > 20}}
+        #     if n_digits < 3:
+        #         if comma_num < 20:
+        #             comma_words = lvl_word.get(comma_num)
+        #         else:
+        #             if comma_num%10:
+        #                 a, b = map(int, comma_str)
+        #                 base = lvl_word.get(a*10)
+        #                 last = singles.get(b)
+        #                 comma_words = base +'-'+ last
+        #             else:
+        #                 comma_words = lvl_word.get(comma_num)
+        #     else:
+        #         a, b, c = map(int, comma_str)
+        #         comma_words = singles.get(a) + '-' + lvl_word
+
+        #         if b:
+        #             comma_words += sep + digit_lvls[2].get(b*10)
+
+        #         if c:    
+        #             comma_words += '-' + singles.get(c)
+
+    num_words = ''
+    for i, comma_x in enumerate(x.split(',')):
+        comma_num = int(comma_x)
+        comma_str = str(comma_num)
+        n_digits = len(comma_str)
+
+        comma_words = ''
+        lvl_word = digit_lvls.get(n_digits)
+        if comma_num:
+            if n_digits < 3:
+                if comma_num < 20:
+                    comma_words = lvl_word.get(comma_num)
+                else:
+                    if comma_num%10:
+                        a, b = map(int, comma_str)
+                        base = lvl_word.get(a*10)
+                        last = singles.get(b)
+                        comma_words = base +'-'+ last
+                    else:
+                        comma_words = lvl_word.get(comma_num)
+            else:
+                a, b, c = map(int, comma_str)
+                comma_words = singles.get(a) + '-' + lvl_word
+
+                if b:
+                    comma_words += sep + digit_lvls[2].get(b*10)
+
+                if c:    
+                    comma_words += '-' + singles.get(c)
+            
+            if commas_left and comma_num:
+                comma_words += ' '+ten_to_3n.get(commas_left) + ', '
+                commas_left -= 1
+
+            # if comma_x == x.count(',') and comma_num < 100:
+
+        num_words += comma_words
+
+    print('Converting',x,'to: ',num_words)
+    return num_words
     
     # To be continued ...
