@@ -75,3 +75,17 @@ def map_str(x, str_ids = {}, join=''):
         raise typeIDs_error
 
     return join.join(map( str_ids.get, map(int, strx) ))
+
+def num2words(x):
+    singles = dict(enumerate(['one','two','three','four',
+                         'five','six','seven','eight','nine'],1))
+
+    unique_tens = {10:'ten', 11:'eleven', 12:'twelve'}
+
+    lvl2 = {20:'twenty', 30:'thirty', 40: 'fourty', 50:'fifty', 
+            60:'sixty', 70:'seventy', 80:'eighty', 90:'ninety'}
+
+    tens = {**unique_tens, 
+            **{10+i//10:j[:-2]+'teen' for i,j in lvl2.items() if i > 20}}
+    
+    # To be continued ...
