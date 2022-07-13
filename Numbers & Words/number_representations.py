@@ -83,28 +83,12 @@ def num2words(num, sep='and'):
     sep = f' {sep} '
 
     # if not commas_left:
-    # def less_than_thousand(x):
-
-        #     if n_digits < 3:
-        #         if comma_num < 20:
-        #             comma_words = lvl_word.get(comma_num)
-        #         else:
-        #             if comma_num%10:
-        #                 a, b = map(int, comma_str)
-        #                 base = lvl_word.get(a*10)
-        #                 last = singles.get(b)
-        #                 comma_words = base +'-'+ last
-        #             else:
-        #                 comma_words = lvl_word.get(comma_num)
-        #     else:
-        #         a, b, c = map(int, comma_str)
-        #         comma_words = singles.get(a) + '-' + lvl_word
-
-        #         if b:
-        #             comma_words += sep + digit_lvls[2].get(b*10)
-
-        #         if c:    
-        #             comma_words += '-' + singles.get(c)
+#     def by_three_digits(x):
+#         x = int(x)
+#         strx = str(x)
+#         n_digits = len(strx)
+#         is_3digits = (n_digits == 3)
+#         last_digits = x % 10**(n_digits - 1)
 
     num_words = ''
     for i, comma_x in enumerate(x.split(',')):
