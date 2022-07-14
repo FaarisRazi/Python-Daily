@@ -77,12 +77,39 @@ def map_str(x, str_ids = {}, join=''):
     return join.join(map( str_ids.get, map(int, strx) ))
 
 # Convert numbers to english-words (US) (To be continued further...)
+
 def num2words(num, sep='and', confirm=True):
+    # num2words(2012345007) returns: 
+    # "Reading 2,012,345,007 as:
+    #  two billion, twelve million, three-hundred and fourty-five thousand, and seven"
+
+    # Formulating a Numbers-to-words dictionary:
+    singles = dict(enumerate(['one','two','three','four',
+                         'five','six','seven','eight','nine'],1))
+
+    numtys = {20:'twenty', 30:'thirty', 40: 'fourty', 50:'fifty', 
+              60:'sixty', 70:'seventy', 80:'eighty', 90:'ninety'}
+
+    ten_teens = {10:'ten', 11:'eleven', 12:'twelve', 
+                 **{i//10 + 10:j[:-2]+'teen' for i,j in numtys.items() if i > 20}}
+
+    refdict = {**singles, **ten_teens, **numtys} # Main 'reference' dictionary to be used
+
+    # Large-number names from - https://www.ibiblio.org/units/large.html
+    ten_to_3n = dict(enumerate(['','thousand', 'million','billion','trillion','quadrillion',
+                 'quintillion','sextillion','septillion','octillion','nonillion',
+                 'quintilliard','undecillion','duodecillion','tredecillion',
+                 'quattuordecillion','quindecillion','sexdecillion','septendecillion',
+                 'octodecillion','novemdecillion','vigintillion','unvigintillion',
+                 'duovigintillion','duodecillion','quattuorvigintillion','quinvigintillion',
+                 'sexvigintillion','septenvigintillion','octovigintillion','quindecillion',
+                 'trigintillion','untrigintillion','duotrigintillion']))
 
     def less_than_1k(x, expr='', just0='zero'):
-        x = int(x) # X = Our number
-        strx = str(x)
+        if type(x) != int:
+            x = int(x)
 
+        strx = str(x) # X as a string
         n_digits = len(strx) # n-number of digits in X
         ten_factor = 10**(n_digits - 1) # 10^(n-1). (n = number of digits)
         fdigits = x % ten_factor # "final" digit/s of X (single or double digits)
@@ -96,42 +123,47 @@ def num2words(num, sep='and', confirm=True):
 
             # Recursion for the last two digits, or repeat the above if-condition's chunk...
             words = base+' and '+less_than_1k(fdigits) if fdigits else base
-        
         else:
             words = refdict[x] if x else just0
 
         return words + expr
 
-        # ~~~~~~~~~~~~~~~~~~~ Old work for less_than_1000(): ~~~~~~~~~~~~~~~~~~~~
-        # is_3digits = (n_digits == 3) # if X has 3 digits (True/False)
-        # edigit = x % 10 # end-digit (last digit of X)
-        # base = refdict[x//ten_factor] +'-hundred and ' if is_3digits else refdict[x//10 * 10]
-        
-        # if not fdigits: # If x is a multiple of 10 or 100
-        #     return base.replace(' and ','')
-        
-        # digit2 = fdigits // 10**(n_digits - 2) # 2nd-digit of our number X
-        # base2 = refdict[fdigits] if fdigits < 20 else refdict[digit2 * 10]+'-'
-        
-        # base += base2.replace('-','') if not edigit else base2#+refdict[edigit]
-        # print(base)
-        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    # ------------- "Main" of our function -------------
+    x = f'{num:,}' # Python < 3.6: "{:,}".format(num)
+    commas_left = x.count(',') # Number of commas in our number
+    chunks_left = x.count(',') + 1 # Number of digit-chunks between commas
+    sep = f' {sep.strip()} '
 
-    x = f'{num:,}' # For Python < 3.6: "{:,}".format(20345678)
-    commas_left = x.count(',')
-    sep = f' {sep} '
-
-    # num_words = ', '.join(map(less_than_1k, x.split(',')))
-    num_words = []
+    num_words = [] # old: = ', '.join(map(less_than_1k, x.split(',')))
+    
     for tri_digits in x.split(','):
-        chunk = " "+ten_to_3n[commas_left] # Millionth/thousandth/etc "chunk"
-        commas_left -= 1
 
-        chunk2words = less_than_1k(tri_digits, expr = chunk)
-
-        num_words.append(chunk2words)
-
-    if confirm:
-        print('Converting our number',x,'to:')
+        # Chunk's expression (Billion/Million/thousand/etc)
+        expr = ' '+ten_to_3n[commas_left] 
         
+        # If chunk is not "000" (or = 0)
+        not_empty_chunk = int(tri_digits)
+
+        if not_empty_chunk: 
+            chunks_left -= 1 # Next digit-chunks left to loop over
+            
+            chunk2words = less_than_1k(tri_digits, expr = expr)
+
+            # Add seperator to the expression of the last chunk
+            # that contains only 1 or 2 digits
+            if not_empty_chunk < 100 and not chunks_left:
+                chunk2words = sep.lstrip() + chunk2words 
+            
+            num_words.append(chunk2words) # words collected for chunk
+            
+            commas_left-=1
+        else:
+            # Skip commas/empty-chunks ('000' or 0)
+            commas_left -= 1
+            chunks_left -= 1
+        
+    # "Confirm" to show our comma-separated number.
+    if confirm:
+        print('Reading',x,'as:')
+
     return ', '.join(num_words)
