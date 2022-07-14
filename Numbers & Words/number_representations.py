@@ -141,13 +141,11 @@ def num2words(num, sep='and', dec='point', show=True):
     
     # Dealing with decimal/float numbers:
     if isinstance(num, float):
-        base_digits, decimal_digits = x.split('.')
+        x, decimal_digits = x.split('.')
 
         if not num.is_integer():
             # Converting decimals to words
-            decimals = ','.join(map(less_than_1k, decimal_digits))
-        else:
-            x = base_digits # Removing '.0' decimal from our number
+            decimals = '-'.join(map(less_than_1k, decimal_digits))
 
     # If our number is less than 4-digits
     if not commas_left: # or num < 1000
@@ -165,7 +163,7 @@ def num2words(num, sep='and', dec='point', show=True):
             if not_empty_chunk: 
                 chunks_left -= 1 # Next digit-chunks left to loop over
                 
-                chunk2words = less_than_1k(tri_digits, expr = expr)
+                chunk2words = less_than_1k(tri_digits, expr = expr).rstrip()
 
                 # Add seperator to the expression of the last chunk
                 # that contains only 1 or 2 digits
@@ -183,12 +181,12 @@ def num2words(num, sep='and', dec='point', show=True):
         num_words = ', '.join(num_words)
 
     if decimals:
-        dec = ' '+dec.strip()+' '
+        dec = ', '+dec.strip()+' '
         num_words += dec + decimals
 
     # "show" -> to show our comma-separated number with result.
     if show:
         comment = 'Reading '+x+' as:\t' + num_words
-        print(comment.replace(': ',':\n') if num > 99 else comment)
+        print(comment.replace('\t','\n') if num > 99 else comment)
 
     return num_words
