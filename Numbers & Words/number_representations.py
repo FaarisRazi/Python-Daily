@@ -76,8 +76,8 @@ def map_str(x, str_ids = {}, join=''):
 
     return join.join(map( str_ids.get, map(int, strx) ))
 
-# Convert numbers to english-words (US) (To be continued further...)
 
+# Convert numbers to english-words (US) (To be continued further...)
 def num2words(num, sep='and', confirm=True):
     # num2words(2012345007) returns: 
     # "Reading 2,012,345,007 as:
