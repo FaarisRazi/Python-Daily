@@ -134,7 +134,7 @@ def num2words(num, sep='and', dec='point', show=True):
     decimals = ''
     x = f'{num:,}'                  # Python < 3.6: "{:,}".format(num)
     commas_left = x.count(',')      # Number of commas in our number
-    chunks_left = x.count(',') + 1  # Number of digit-chunks between commas
+    chunks_left = commas_left + 1   # Number of digit-chunks between commas
     sep = f' '+sep.strip()+' '      # Separator with spaces
     
     num_words = [] # before: = ', '.join(map(less_than_1k, x.split(',')))
@@ -186,7 +186,7 @@ def num2words(num, sep='and', dec='point', show=True):
 
     # "show" -> to show our comma-separated number with result.
     if show:
-        comment = 'Reading '+x+' as:\t' + num_words
+        comment = 'Reading '+f'{num:,}'+' as:\t' + num_words
         print(comment.replace('\t','\n') if num > 99 else comment)
 
     return num_words
