@@ -77,12 +77,12 @@ def map_str(x, str_ids = {}, join=''):
     return join.join(map( str_ids.get, map(int, strx) ))
 
 
-# Convert numbers to english-words (US) (To be continued further...)
-def num2words(num, sep='and', confirm=True):
-    # num2words(2012345007) returns: 
-    # "Reading 2,012,345,007 as:
-    #  two billion, twelve million, three-hundred and fourty-five thousand, and seven"
-
+# Convert numbers to english-words (US) (Complete so far)
+def num2words(num, sep='and', dec='point', show=True):
+    # num2words(20145007.123) returns: 
+    # "Reading 20,145,007.123 as:
+    #  twenty million, one-hundred and fourty thousand, and seven, point one-two-three"
+    
     # Formulating a Numbers-to-words dictionary:
     singles = dict(enumerate(['one','two','three','four',
                          'five','six','seven','eight','nine'],1))
@@ -106,7 +106,8 @@ def num2words(num, sep='and', confirm=True):
                  'trigintillion','untrigintillion','duotrigintillion']))
 
     def less_than_1k(x, expr='', just0='zero'):
-        if type(x) != int:
+        
+        if not isinstance(x, int):
             x = int(x)
 
         strx = str(x) # X as a string
@@ -114,9 +115,10 @@ def num2words(num, sep='and', confirm=True):
         ten_factor = 10**(n_digits - 1) # 10^(n-1). (n = number of digits)
         fdigits = x % ten_factor # "final" digit/s of X (single or double digits)
 
+        # print(fdigits) # To track recursions (next fdigits)
         if n_digits == 2:
-            # print(fdigits)
-            words = refdict[x] if x < 20 else refdict[x//10 * 10]+'-'+refdict[fdigits]
+            words = refdict[x] if x < 20 else refdict[x//10 * 10]
+            words += '-'+refdict[fdigits] if x < 10 else ''
         
         elif n_digits == 3:
             base = refdict[x//ten_factor] +'-hundred'
@@ -129,41 +131,64 @@ def num2words(num, sep='and', confirm=True):
         return words + expr
 
     # ------------- "Main" of our function -------------
-    x = f'{num:,}' # Python < 3.6: "{:,}".format(num)
-    commas_left = x.count(',') # Number of commas in our number
-    chunks_left = x.count(',') + 1 # Number of digit-chunks between commas
-    sep = f' {sep.strip()} '
-
-    num_words = [] # old: = ', '.join(map(less_than_1k, x.split(',')))
+    decimals = ''
+    x = f'{num:,}'                  # Python < 3.6: "{:,}".format(num)
+    commas_left = x.count(',')      # Number of commas in our number
+    chunks_left = x.count(',') + 1  # Number of digit-chunks between commas
+    sep = f' '+sep.strip()+' '      # Separator with spaces
     
-    for tri_digits in x.split(','):
+    num_words = [] # before: = ', '.join(map(less_than_1k, x.split(',')))
+    
+    # Dealing with decimal/float numbers:
+    if isinstance(num, float):
+        base_digits, decimal_digits = x.split('.')
 
-        # Chunk's expression (Billion/Million/thousand/etc)
-        expr = ' '+ten_to_3n[commas_left] 
-        
-        # If chunk is not "000" (or = 0)
-        not_empty_chunk = int(tri_digits)
-
-        if not_empty_chunk: 
-            chunks_left -= 1 # Next digit-chunks left to loop over
-            
-            chunk2words = less_than_1k(tri_digits, expr = expr)
-
-            # Add seperator to the expression of the last chunk
-            # that contains only 1 or 2 digits
-            if not_empty_chunk < 100 and not chunks_left:
-                chunk2words = sep.lstrip() + chunk2words 
-            
-            num_words.append(chunk2words) # words collected for chunk
-            
-            commas_left-=1
+        if not num.is_integer():
+            # Converting decimals to words
+            decimals = ','.join(map(less_than_1k, decimal_digits))
         else:
-            # Skip commas/empty-chunks ('000' or 0)
-            commas_left -= 1
-            chunks_left -= 1
-        
-    # "Confirm" to show our comma-separated number.
-    if confirm:
-        print('Reading',x,'as:')
+            x = base_digits # Removing '.0' decimal from our number
 
-    return ', '.join(num_words)
+    # If our number is less than 4-digits
+    if not commas_left: # or num < 1000
+        num_words = less_than_1k(num)
+
+    else:
+        for tri_digits in x.split(','):
+
+            # Chunk's expression (Billion/Million/thousand/etc)
+            expr = ' '+ten_to_3n[commas_left] 
+            
+            # If chunk is not "000" (or = 0)
+            not_empty_chunk = int(tri_digits)
+
+            if not_empty_chunk: 
+                chunks_left -= 1 # Next digit-chunks left to loop over
+                
+                chunk2words = less_than_1k(tri_digits, expr = expr)
+
+                # Add seperator to the expression of the last chunk
+                # that contains only 1 or 2 digits
+                if not_empty_chunk < 100 and not chunks_left:
+                    chunk2words = sep.lstrip() + chunk2words 
+                
+                num_words.append(chunk2words) # words collected for chunk
+                
+                commas_left-=1 # Next commas left
+            else:
+                # Skip commas/empty-chunks ('000' or 0)
+                commas_left -= 1
+                chunks_left -= 1
+
+        num_words = ', '.join(num_words)
+
+    if decimals:
+        dec = ' '+dec.strip()+' '
+        num_words += dec + decimals
+
+    # "show" -> to show our comma-separated number with result.
+    if show:
+        comment = 'Reading '+x+' as:\t' + num_words
+        print(comment.replace(': ',':\n') if num > 99 else comment)
+
+    return num_words
