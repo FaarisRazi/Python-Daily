@@ -76,59 +76,62 @@ def map_str(x, str_ids = {}, join=''):
 
     return join.join(map( str_ids.get, map(int, strx) ))
 
-def num2words(num, sep='and'):
+# Convert numbers to english-words (US) (To be continued further...)
+def num2words(num, sep='and', confirm=True):
+
+    def less_than_1k(x, expr='', just0='zero'):
+        x = int(x) # X = Our number
+        strx = str(x)
+
+        n_digits = len(strx) # n-number of digits in X
+        ten_factor = 10**(n_digits - 1) # 10^(n-1). (n = number of digits)
+        fdigits = x % ten_factor # "final" digit/s of X (single or double digits)
+
+        if n_digits == 2:
+            # print(fdigits)
+            words = refdict[x] if x < 20 else refdict[x//10 * 10]+'-'+refdict[fdigits]
+        
+        elif n_digits == 3:
+            base = refdict[x//ten_factor] +'-hundred'
+
+            # Recursion for the last two digits, or repeat the above if-condition's chunk...
+            words = base+' and '+less_than_1k(fdigits) if fdigits else base
+        
+        else:
+            words = refdict[x] if x else just0
+
+        return words + expr
+
+        # ~~~~~~~~~~~~~~~~~~~ Old work for less_than_1000(): ~~~~~~~~~~~~~~~~~~~~
+        # is_3digits = (n_digits == 3) # if X has 3 digits (True/False)
+        # edigit = x % 10 # end-digit (last digit of X)
+        # base = refdict[x//ten_factor] +'-hundred and ' if is_3digits else refdict[x//10 * 10]
+        
+        # if not fdigits: # If x is a multiple of 10 or 100
+        #     return base.replace(' and ','')
+        
+        # digit2 = fdigits // 10**(n_digits - 2) # 2nd-digit of our number X
+        # base2 = refdict[fdigits] if fdigits < 20 else refdict[digit2 * 10]+'-'
+        
+        # base += base2.replace('-','') if not edigit else base2#+refdict[edigit]
+        # print(base)
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     x = f'{num:,}' # For Python < 3.6: "{:,}".format(20345678)
     commas_left = x.count(',')
     sep = f' {sep} '
 
-    # if not commas_left:
-#     def by_three_digits(x):
-#         x = int(x)
-#         strx = str(x)
-#         n_digits = len(strx)
-#         is_3digits = (n_digits == 3)
-#         last_digits = x % 10**(n_digits - 1)
+    # num_words = ', '.join(map(less_than_1k, x.split(',')))
+    num_words = []
+    for tri_digits in x.split(','):
+        chunk = " "+ten_to_3n[commas_left] # Millionth/thousandth/etc "chunk"
+        commas_left -= 1
 
-    num_words = ''
-    for i, comma_x in enumerate(x.split(',')):
-        comma_num = int(comma_x)
-        comma_str = str(comma_num)
-        n_digits = len(comma_str)
+        chunk2words = less_than_1k(tri_digits, expr = chunk)
 
-        comma_words = ''
-        lvl_word = digit_lvls.get(n_digits)
-        if comma_num:
-            if n_digits < 3:
-                if comma_num < 20:
-                    comma_words = lvl_word.get(comma_num)
-                else:
-                    if comma_num%10:
-                        a, b = map(int, comma_str)
-                        base = lvl_word.get(a*10)
-                        last = singles.get(b)
-                        comma_words = base +'-'+ last
-                    else:
-                        comma_words = lvl_word.get(comma_num)
-            else:
-                a, b, c = map(int, comma_str)
-                comma_words = singles.get(a) + '-' + lvl_word
+        num_words.append(chunk2words)
 
-                if b:
-                    comma_words += sep + digit_lvls[2].get(b*10)
-
-                if c:    
-                    comma_words += '-' + singles.get(c)
-            
-            if commas_left and comma_num:
-                comma_words += ' '+ten_to_3n.get(commas_left) + ', '
-                commas_left -= 1
-
-            # if comma_x == x.count(',') and comma_num < 100:
-
-        num_words += comma_words
-
-    print('Converting',x,'to: ',num_words)
-    return num_words
-    
-    # To be continued ...
+    if confirm:
+        print('Converting our number',x,'to:')
+        
+    return ', '.join(num_words)
