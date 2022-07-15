@@ -1,5 +1,15 @@
 alphabets = "abcdefghijklmnopqrstuvwxyz"
 
+# Truncate a number (eg; truncate to 3 decimals: 1.2599999 to 1.259)
+def trunc(x, dp=3):
+    
+    if isinstance(x, (int, float)):
+        x = float([: str(x).index('.')+1 + dp])
+    else:
+        raise ValueError(f"Invalid {type(x)} input, only numbers allowed.")
+    
+    return x
+    
 # Get ordinal numbers (eg; '1st', '2nd', '3rd', '10th', etc)
 def ordinal(num, include=True):
     """
