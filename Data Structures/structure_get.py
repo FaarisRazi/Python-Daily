@@ -9,8 +9,8 @@ unique_lists = lambda nested_list: list(set([tuple(sorted(i)) for i in nested_li
 
 # Flatten a data-structure of nested items.
 def flatten(x):
-    # Example lst = [[1], {2,3}, ((4)), 5, "six"]:
-    # flatten(lst) = [1, 2, 3, 4, 5, 'six']
+    # Example lst = [[1], {2,3}, (4,5), 6, "seven"]:
+    # flatten(lst) = [1, 2, 3, 4, 5, 6, 'seven']
     
     if not is_structure(x):
         raise ValueError(f"Invalide {basket} input, only data-structures"+
