@@ -1,12 +1,27 @@
 types = (list, tuple, set, dict, str)
 
-# To check if an object/data is a data-structure (one of "types" above)
+# To check if an object/data is a data-structure (one of "types" above).
 is_structure = lambda x: isinstance(x, types)
 
-# Retrieve unique lists/tuples from a nested-list (eg; [[1,2], [2,1]] => [1,2])
+# Retrieve unique lists/tuples from a nested-list (eg; [[1,2], [2,1]] => [1,2]).
 unique_lists = lambda nested_list: list(set([tuple(sorted(i)) for i in nested_list]))
 
-# Get a random data-structure/"basket" (list/tuple.. etc) containing random characters/numbers
+
+# Flatten a data-structure of nested items.
+def flatten(x):
+    # Example lst = [[1], {2,3}, ((4)), 5, "six"]:
+    # flatten(lst) = [1, 2, 3, 4, 5, 'six']
+    
+    if not is_structure(x):
+        raise ValueError(f"Invalide {basket} input, only data-structures"+
+                          "\n(list, tuple, set, dict, str) allowed."  )
+    basket = type(x)
+    xlist = [list(i) if not isinstance(i, (int, float, str)) else [i] for i in x]
+
+    return basket(sum(xlist, []))
+
+
+# Get a random data-structure/"basket" (list/tuple.. etc) containing random characters/numbers.
 def rand_basket(items=5, basket=any, nest=0, nest_type=any):
     # items = int -> Number of items in your "basket"
     # basket = any/list/tuple/set/dict -> data-structure type of your basket or 'any' for any type
