@@ -1,3 +1,7 @@
+types = (list, tuple, set, dict, str)
+
+# To check if an object/data is a data-structure (one of "types" above)
+is_structure = lambda x: isinstance(x, types)
 
 # Retrieve unique lists/tuples from a nested-list (eg; [[1,2], [2,1]] => [1,2])
 unique_lists = lambda nested_list: list(set([tuple(sorted(i)) for i in nested_list]))
