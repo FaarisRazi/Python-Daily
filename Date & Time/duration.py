@@ -12,7 +12,7 @@ def duration_seconds(x):
         if x.replace('.','').isdigit():
             x = float(x)
 
-        elif ':' in x:
+        elif ':' in x: # Section for duration-to-seconds 
             sep_time = x.split(':')
             freqs = len(sep_time)
             tform = '%H:%M:%S'
@@ -30,4 +30,4 @@ def duration_seconds(x):
         else:
             raise val_err
 
-    return str(datetime.timedelta(seconds=x))
+    return str(datetime.timedelta(seconds=x)) # Seconds-to-duration
