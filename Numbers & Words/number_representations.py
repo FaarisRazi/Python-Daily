@@ -197,6 +197,6 @@ def num2words(num, sep='and', dec='point', show=True):
     # "show" -> to show our comma-separated number with result.
     if show:
         comment = 'Reading '+f'{num:,}'+' as:\t' + num_words
-        print(comment.replace('\t','\n') if num > 99 else comment)
+        print(comment.replace('\t','\n') if num > 999 else comment)
 
     return num_words
