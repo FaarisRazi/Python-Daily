@@ -2,10 +2,10 @@
 
 # Multi-replace: Replace multiple sub-strings within a string
 def mreplace(text, to_replace):
-    # to_replace = dict -> {text_to_replace : new_text, ...}
+    # to_replace = dict -> {old_text : new_text, ...}
     
     # If items-to-replace passed as a list, these items
-    # will automatically be removed from text.
+    # will be removed from the text automatically.
     if type(to_replace) == list: 
         to_replace = {item:'' for item in to_replace}
         
