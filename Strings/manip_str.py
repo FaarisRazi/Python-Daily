@@ -4,9 +4,9 @@
 def mreplace(text, to_replace):
     # to_replace = dict -> {old_text : new_text, ...}
     
-    # If items-to-replace passed as a list, these items
+    # If "to_replace" passed as a list/tuple/set, these items
     # will be removed from the text automatically.
-    if type(to_replace) == list: 
+    if isinstance(to_replace, (list, tuple, set)): 
         to_replace = {item:'' for item in to_replace}
         
     for old, new in to_replace.items(): #Replace all substrings
