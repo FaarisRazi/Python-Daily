@@ -5,9 +5,11 @@ from string import printable
 numbers = printable[:10]
 symbols = printable[62:]
 
-#Get sub-string contained within brackets in text
+# Get sub-string contained within brackets in text
 str_in_bracs = lambda s: re.search(r"\(([A-Za-z0-9_]+)\)", s)
 
+# Keep only alphabets inside text
+filter_alpha = lambda s: ''.join(filter(lambda x: x.isalpha(), s))
 
 # Multi-replace: Replace multiple sub-strings within a string
 def mreplace(text, to_replace):
