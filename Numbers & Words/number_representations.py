@@ -1,5 +1,8 @@
 alphabets = "abcdefghijklmnopqrstuvwxyz"
 
+# Check if a number is "Odd" or "Even" (decimals ignored, base/integer numbers used)
+oddeven = lambda x: 'Odd' if int(x)%2 else 'Even'
+
 # Truncate a number (eg; truncate to 3 decimals: 1.2599999 to 1.259)
 def trunc(x, dp=3):
     
@@ -9,7 +12,8 @@ def trunc(x, dp=3):
         raise ValueError(f"Invalid {type(x)} input, only numbers allowed.")
     
     return x
-    
+
+
 # Get ordinal numbers (eg; '1st', '2nd', '3rd', '10th', etc)
 def ordinal(num, include=True):
     """
