@@ -11,13 +11,11 @@ def webtables(target_url, disc=True):
         
     headers = {'User-Agent': 'okay'} # Some user-agent name
     try:
-        req = ur.Request(url=target_url)
+        req = ur.Request(url=target_url) # Without headers
         f = ur.urlopen(req)
         xhtml = f.read().decode('utf-8')
         p = HTMLTableParser()
-        p.feed(xhtml)
-        
-        return p.tables 
+        p.feed(xhtml) 
     
     except:
         req = ur.Request(url=target_url,headers=headers)
@@ -25,5 +23,5 @@ def webtables(target_url, disc=True):
         xhtml = f.read().decode('utf-8')
         p = HTMLTableParser()
         p.feed(xhtml)
-        
-        return p.tables
+    
+    return p.tables
