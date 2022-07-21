@@ -1,7 +1,7 @@
 import datetime, time
 
 # Convert duration (eg; '10:30') to seconds, and vice versa
-def duration_seconds(x):
+def duration(x):
     # Examples for seconds-to-duration and duration-to-seconds:
     # duration_seconds(1234)    = 0:20:34
     # duration_seconds("12:34") = 754
