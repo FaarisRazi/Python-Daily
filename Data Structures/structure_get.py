@@ -21,6 +21,33 @@ def flatten(x):
     return basket(sum(xlist, []))
 
 
+# Make Ragged-Lists (InshAllah will implement for more data-structures)
+def ragged(nests=2, start=0):
+    # nests = int -> Number of "nests"/sub-lists inside our list (/tuple/set).
+    # start = int -> Values in sub-lists to start counting from, examples:
+
+    # ragged(start=0, nests=5)  = [[0], [1, 2], [3, 4, 5], [6, 7, 8, 9], [10, 11, 12, 13, 14]]
+    # ragged(start=10, nests=4) = [[10], [11, 12], [13, 14, 15], [16, 17, 18, 19]]
+    # ragged(start=-4, nests=3) = [[-4], [-3, -2], [-1, 0, 1]]
+
+    upto = nests
+    lst, k = [], 0
+
+    for i in range(1, upto+1):
+        sublst = []
+
+        for j in range(i):
+            num = i+j+k
+            item = start + num-1
+
+            sublst.append(item)
+        
+        lst.append(sublst)
+        k = num-i
+
+    return lst
+
+
 # Get a random data-structure/"basket" (list/tuple.. etc) containing random characters/numbers.
 def rand_basket(items=5, basket=any, nest=0, nest_type=any):
     # items = int -> Number of items in your "basket"
