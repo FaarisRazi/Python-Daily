@@ -21,15 +21,18 @@ def flatten(x):
     return basket(sum(xlist, []))
 
 
-# Make Ragged-Lists (InshAllah will implement for more data-structures)
-def ragged(nests=2, start=0, stop=0, extras=False):
+# Make Ragged-Arrays
+def ragged(basket=[], nests=2, start=0, stop=0):
     # nests = int -> Number of "nests"/sub-lists inside our list/tuple/set
-    # start = int -> Values in sub-lists to start counting from, examples:
+    # start = int (default: 0) -> Starter-count of values in sub-lists.
+    # stop = int (default: 0) -> Stop at an item/number (> "start") within sub-lists.
 
-    # ragged(start=0, nests=5)  = [[0], [1, 2], [3, 4, 5], [6, 7, 8, 9], [10, 11, 12, 13, 14]]
-    # ragged(start=10, nests=4) = [[10], [11, 12], [13, 14, 15], [16, 17, 18, 19]]
-    # ragged(start=-4, nests=3) = [[-4], [-3, -2], [-1, 0, 1]]
-
+    # ragged(nests=5, stop=7)       = [[0], [1, 2], [3, 4, 5], [6, 7]]
+    # ragged(start=10, nests=4)     = [[10], [11, 12], [13, 14, 15], [16, 17, 18, 19]]
+    # ragged(start=-4, nests=3)     = [[-4], [-3, -2], [-1, 0, 1]]
+    # ragged(basket='Hello World')  = [['H'], ['e', 'l'], ['l', 'o', ' '], ['W', 'o', 'r', 'l'], ['d']]
+    
+    # ---------------------- Base-Case:
     upto = nests
     lst, k = [], 0
 
@@ -47,6 +50,19 @@ def ragged(nests=2, start=0, stop=0, extras=False):
             lst.append(sublst)
         
         k = num-i
+    # ---------------------- Case-1: List of items
+    if basket and isinstance(basket, types):
+        dict_basket = dict(enumerate(basket))
+        
+        n_items = len(basket)
+        ragged_keys = ragged(nests = n_items, stop = n_items-1)
+        
+        ragged_x = []
+        for sublst in ragged_keys:
+            mapped = list(map(dict_basket.get, sublst))
+            ragged_x.append(mapped)
+        
+        lst = type(basket)(ragged_x)
 
     return lst
 
