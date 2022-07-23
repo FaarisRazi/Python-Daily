@@ -22,8 +22,8 @@ def flatten(x):
 
 
 # Make Ragged-Lists (InshAllah will implement for more data-structures)
-def ragged(nests=2, start=0):
-    # nests = int -> Number of "nests"/sub-lists inside our list (/tuple/set).
+def ragged(nests=2, start=0, stop=0, extras=False):
+    # nests = int -> Number of "nests"/sub-lists inside our list/tuple/set
     # start = int -> Values in sub-lists to start counting from, examples:
 
     # ragged(start=0, nests=5)  = [[0], [1, 2], [3, 4, 5], [6, 7, 8, 9], [10, 11, 12, 13, 14]]
@@ -40,9 +40,12 @@ def ragged(nests=2, start=0):
             num = i+j+k
             item = start + num-1
 
-            sublst.append(item)
+            if item <= stop and stop > start:
+                sublst.append(item)
         
-        lst.append(sublst)
+        if sublst:
+            lst.append(sublst)
+        
         k = num-i
 
     return lst
