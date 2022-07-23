@@ -22,17 +22,30 @@ def flatten(x):
 
 
 # Make Ragged-Arrays
-def ragged(basket=[], nests=2, start=0, stop=0):
+def ragged(basket=[], nests=5, start=0, stop=0, inner=list):
     # nests = int -> Number of "nests"/sub-lists inside our list/tuple/set
-    # start = int (default: 0) -> Starter-count of values in sub-lists.
-    # stop = int (default: 0) -> Stop at an item/number (> "start") within sub-lists.
-
-    # ragged(nests=5, stop=7)       = [[0], [1, 2], [3, 4, 5], [6, 7]]
-    # ragged(start=10, nests=4)     = [[10], [11, 12], [13, 14, 15], [16, 17, 18, 19]]
-    # ragged(start=-4, nests=3)     = [[-4], [-3, -2], [-1, 0, 1]]
-    # ragged(basket='Hello World')  = [['H'], ['e', 'l'], ['l', 'o', ' '], ['W', 'o', 'r', 'l'], ['d']]
+    # start = int -> Values in sub-lists to start counting from, examples:
+    # stop = int (default: 0) -> Stop at an item/number > "start", within sub-lists.
+    
+    # Examples:
+    # ragged(stop=7)            = [[0], [1, 2], [3, 4, 5], [6, 7]]
+    # ragged(start=-4, nests=3) = [[-4], [-3, -2], [-1, 0, 1]]
+    # ragged("Hello World")     = [['H'], ['e', 'l'], ['l', 'o', ' '], ['W', 'o', 'r', 'l'], ['d']]
     
     # ---------------------- Base-Case:
+    if basket and isinstance(basket, types):
+        ragged_map = dict(enumerate(basket))
+        
+        n_items = len(basket)
+        basket = type(basket)
+        ragged_keys = ragged(nests = n_items, stop = n_items-1)
+        
+        if basket == set: inner = tuple
+
+        ragged_basket = [inner(map(ragged_map.get, sublst)) 
+                                        for sublst in ragged_keys]
+        return basket(ragged_basket)
+
     upto = nests
     lst, k = [], 0
 
@@ -50,22 +63,8 @@ def ragged(basket=[], nests=2, start=0, stop=0):
             lst.append(sublst)
         
         k = num-i
-    # ---------------------- Case-1: List of items
-    if basket and isinstance(basket, types):
-        dict_basket = dict(enumerate(basket))
-        
-        n_items = len(basket)
-        ragged_keys = ragged(nests = n_items, stop = n_items-1)
-        
-        ragged_x = []
-        for sublst in ragged_keys:
-            mapped = list(map(dict_basket.get, sublst))
-            ragged_x.append(mapped)
-        
-        lst = type(basket)(ragged_x)
-
+    
     return lst
-
 
 # Get a random data-structure/"basket" (list/tuple.. etc) containing random characters/numbers.
 def rand_basket(items=5, basket=any, nest=0, nest_type=any):
