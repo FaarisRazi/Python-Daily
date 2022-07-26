@@ -1,5 +1,6 @@
 # Handy functions for file/folder manipulation to be added InshaAllah! 
 import os
+import shutil
 
 # Get the  current working-directory
 current_dir = os.getcwd().replace('\\','/')+'/'
