@@ -8,8 +8,12 @@ current_dir = os.getcwd().replace('\\','/')+'/'
 isfile = lambda path: os.path.isfile(path)
 
 # Check if file is of a given extension/type 
-istype = lambda file, ext='': file.endswith(ext)  
+istype = lambda file, ext='': file.endswith(ext)
 
+# Get list of files/folders in directory
+files_in = lambda path: os.listdir(path)
+
+# Remove files with specific types and/or folders in a directory
 def remove(path, empty=False, folders=False, types=[]):
     if empty:
         return os.rmdir(path)
@@ -28,10 +32,3 @@ def remove(path, empty=False, folders=False, types=[]):
             # elif folders and not isfile(file):
 
         return True
-
-# Get list of files/folders in directory
-files_in = lambda path: os.listdir(path)
-
-def remove(path, empty=False):
-  if empty:
-    return os.rmdir(path)
