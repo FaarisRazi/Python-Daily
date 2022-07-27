@@ -32,7 +32,7 @@ def img_trim(img):
 def remove_img_background(x, white=True, save=False):
     remove_id = 255 if white else 0
     
-    img = x.convert('RGB')
+    img = x.convert('RGBA')
     img_data = img.getdata()
     
     new_data = []
@@ -50,3 +50,26 @@ def remove_img_background(x, white=True, save=False):
         img.save('img.png' if isinstance(save, bool) else f'{save}.png')
     
     return img
+
+
+# Sharpen Image quality 
+def img_sharpen(image, kernel_size=(5, 5), sigma=1.0, amount=1.0, threshold=0, as_img=False):
+    """Return a sharpened version of the image, using an unsharp mask."""
+    
+    if 'PIL.Image.Image' in str(type(image)):
+        image = np.array(image)
+        
+    blurred = cv.GaussianBlur(image, kernel_size, sigma)
+    sharpened = float(amount + 1) * image - float(amount) * blurred
+    sharpened = np.maximum(sharpened, np.zeros(sharpened.shape))
+    sharpened = np.minimum(sharpened, 255 * np.ones(sharpened.shape))
+    sharpened = sharpened.round().astype(np.uint8)
+    
+    if threshold > 0:
+        low_contrast_mask = np.absolute(image - blurred) < threshold
+        np.copyto(sharpened, image, where=low_contrast_mask)
+    
+    if as_img:
+        sharpened = Image.fromarray(sharpened)
+    
+    return sharpened
