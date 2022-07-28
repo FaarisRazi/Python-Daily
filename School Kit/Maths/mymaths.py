@@ -2,21 +2,12 @@ import numpy as np
 from math import sqrt, gcm 
 # gcm: Greatest Common Multiple (or Greatest Common Divisor)
 
-# Sum numbers 1 upto x.
-#(Known as "Triangular number": https://en.wikipedia.org/wiki/Triangular_number)
-sumto = lambda x: (x**2 + x)//2
-
 # Convert list/tuple into array of numbers
 vector = lambda lst: np.array(lst) # set/dict will be 0-dimensional arrays
 
-# Using Numpy for factorial (instead of the commonly used recursion)
-factorial = lambda n: np.prod(np.arange(1,n+1))
-
-# Above factorial() vectorized for numpy-arrays
-np_factorial = np.vectorize(factorial)
-
-# Sums of factorials upto n (1! + 2! + ... + n!)
-factorial_sums = lambda n: sum(np_factorial(np.arange(1,n+1)))
+# Sum numbers 1 upto x.
+#(Known as "Triangular number": https://en.wikipedia.org/wiki/Triangular_number)
+sumto = lambda x: (x**2 + x)//2
 
 # Lowest Common Multiple (or Least Common Divisor)
 def lcm(numbers):
@@ -25,14 +16,6 @@ def lcm(numbers):
         
     return np.lcm.reduce(numbers)
 
-# Find the mode of an array of numbers
-def mode(numbers):
-    uniqs = np.unique(numbers, return_counts=True)
-    freqs = np.asarray(uniqs).T # Array of number and their count
-    most_counts = max(uniqs[-1]) # The highest count (of some number)
-    
-    # Return Number/s with the highest count
-    return freqs[np.where(freqs[:,1] == most_counts)][:,0] 
 
 # Get x solutions for your quadratic equation: ax^2 + bx + c
 def quadratic(a,b,c, show=True, equal1 = False): 
@@ -53,3 +36,25 @@ def quadratic(a,b,c, show=True, equal1 = False):
         result = 1/result * -1 # Return factorized x equations as = 1.
     
     return result
+
+# ---------- Common in Statistics ----------
+# Using Numpy for factorial (instead of the commonly used recursion)
+factorial = lambda n: np.prod(np.arange(1,n+1))
+
+# Above factorial() vectorized for numpy-arrays
+np_factorial = np.vectorize(factorial)
+
+# Sums of factorials upto n (1! + 2! + ... + n!)
+factorial_sums = lambda n: sum(np_factorial(np.arange(1,n+1)))
+
+# Find the mean of an array of numbers
+mean = lambda numbers: np.mean(numbers)
+
+# Find the mode of an array of numbers
+def mode(numbers):
+    uniqs = np.unique(numbers, return_counts=True)
+    freqs = np.asarray(uniqs).T # Array of number and their count
+    most_counts = max(uniqs[-1]) # The highest count (of some number)
+    
+    # Return Number/s with the highest count
+    return freqs[np.where(freqs[:,1] == most_counts)][:,0] 
