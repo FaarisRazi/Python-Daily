@@ -1,5 +1,5 @@
 import numpy as np
-from math import sqrt
+from math import sqrt, gcm
 
 # Sum numbers 1 upto x.
 #(Known as "Triangular number": https://en.wikipedia.org/wiki/Triangular_number)
@@ -16,6 +16,14 @@ np_factorial = np.vectorize(factorial)
 
 # Sums of factorials upto n (1! + 2! + ... + n!)
 factorial_sums = lambda n: sum(np_factorial(np.arange(1,n+1)))
+
+# Lowest Common Multiple (or Least Common Divisor)
+def lcm(numbers):
+    if isinstance(numbers, (set, dict)):
+        numbers = tuple(numbers)
+        
+    return np.lcm.reduce(numbers)
+
 # Get x solutions for your quadratic equation: ax^2 + bx + c
 def quadratic(a,b,c, show=True, equal1 = False): 
     # Example for x^2 - 5x + 6 = quadratic(1,-5,6):
