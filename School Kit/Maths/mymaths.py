@@ -62,3 +62,8 @@ def mode(numbers):
     
 # Find the median of an array of numbers
 median = lambda numbers: np.median(numbers)
+
+# Getting the Standard Deviation and Variance of numbers:
+stdev = lambda numbers: np.std(numbers)
+variance = lambda numbers: stdev(numbers)**2
+
