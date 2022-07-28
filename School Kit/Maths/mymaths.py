@@ -1,5 +1,6 @@
 import numpy as np
-from math import sqrt, gcm
+from math import sqrt, gcm 
+# gcm: Greatest Common Multiple (or Greatest Common Divisor)
 
 # Sum numbers 1 upto x.
 #(Known as "Triangular number": https://en.wikipedia.org/wiki/Triangular_number)
@@ -23,6 +24,15 @@ def lcm(numbers):
         numbers = tuple(numbers)
         
     return np.lcm.reduce(numbers)
+
+# Find the mode of an array of numbers
+def mode(numbers):
+    uniqs = np.unique(numbers, return_counts=True)
+    freqs = np.asarray(uniqs).T # Array of number and their count
+    most_counts = max(uniqs[-1]) # The highest count (of some number)
+    
+    # Return Number/s with the highest count
+    return freqs[np.where(freqs[:,1] == most_counts)][:,0] 
 
 # Get x solutions for your quadratic equation: ax^2 + bx + c
 def quadratic(a,b,c, show=True, equal1 = False): 
