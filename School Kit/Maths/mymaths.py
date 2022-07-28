@@ -57,4 +57,8 @@ def mode(numbers):
     most_counts = max(uniqs[-1]) # The highest count (of some number)
     
     # Return Number/s with the highest count
-    return freqs[np.where(freqs[:,1] == most_counts)][:,0] 
+    return freqs[np.where(freqs[:,1] == most_counts)][:,0]
+    
+    
+# Find the median of an array of numbers
+median = lambda numbers: np.median(numbers)
