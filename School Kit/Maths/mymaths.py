@@ -1,6 +1,9 @@
 import numpy as np
-from math import sqrt, gcm 
-# gcm: Greatest Common Multiple (or Greatest Common Divisor)
+from math import sqrt, gcm # gcm: Greatest Common Multiple (or Greatest Common Divisor)
+from fractions import Fraction
+
+# Convert a decimal number to a fraction (smallest/largest ratio):
+fraction = lambda x, lowest=True: Fraction(x).limit_denominator() if lowest else '%d/%d'%(x.as_integer_ratio())
 
 # Convert list/tuple into array of numbers
 vector = lambda lst: np.array(lst) # set/dict will be 0-dimensional arrays
