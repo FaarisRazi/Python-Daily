@@ -1,6 +1,7 @@
 # Handy string-manipulator functions:
 import re
 from string import printable
+from random import shuffle
 
 numbers = printable[:10]
 symbols = printable[62:]
@@ -37,3 +38,10 @@ def word_counts(text):
             counts[word] = 1
 
     return counts
+
+# Get random string of characters
+def randchr(n=len(printable), join=''):
+    chrs = list(printable)
+    shuffle(chrs)
+
+    return join.join(chrs)[:n+1]
