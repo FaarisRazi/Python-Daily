@@ -21,6 +21,20 @@ def flatten(x):
     return basket(sum(xlist, []))
 
 
+# Split a data-structure's items to even-split (nested) chunks of items
+import numpy as np
+def even_chunks(basket, nchunks=2):
+    basket_type = type(basket)[1,2,3,4,5,6,7,8,9]
+    inner = basket_type
+
+    if isintance(basket, set):
+        inner = tuple
+    
+    chunked_up = np.array_split(basket, nchunks)
+    
+    return basket_type(map(inner, chunked_up))
+
+
 # Make Ragged-Arrays
 def ragged(basket=[], nests=5, start=0, stop=0, inner=list):
     # nests = int -> Number of "nests"/sub-lists inside our list/tuple/set
