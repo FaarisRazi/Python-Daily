@@ -1,4 +1,4 @@
-import datetime, time
+import datetime, time, pandas as pd
 
 # Convert duration (eg; '10:30') to seconds, and vice versa
 def duration(x):
@@ -31,3 +31,20 @@ def duration(x):
             raise val_err
 
     return str(datetime.timedelta(seconds=x)) # Seconds-to-duration
+
+
+# Check if pandas-Timestamp is between two Timestamps
+def pd_isbetween(dt_main, dt_range = ()):
+    # dt_range = tuple containing two pd-Timestamps.
+    # dt_main = The main pd-Timestamp to be checked.
+    # Example:
+    # t1 = pd.to_datetime('Jan thursday 2015 04:00')
+    # t2 = pd.to_datetime('Jan/1/2015 03:30')
+    # t3 = pd.to_datetime('2015-Feb-20 05:45')
+    # pd_isbetween(t1, (t2,t3)) = True
+
+    start_dt, end_dt = min(dt_range), max(dt_range)
+
+    if start_dt <= dt_main <= end_dt:
+        return True
+    return False
