@@ -73,5 +73,5 @@ variance = lambda numbers: stdev(numbers)**2
 # Permutations for "r" number of objects from a total of "n" number of objects
 nPr = lambda n, r, rep=False: factorial(n) / factorial(n-r) if not rep else n**r
 
-
-
+# Combinations of "r" number of objects chosen from "n" number of objects
+nCr = lambda n, r: nPr(n,r) * 1/factorial(r)
