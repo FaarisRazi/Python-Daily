@@ -70,3 +70,8 @@ median = lambda numbers: np.median(numbers)
 stdev = lambda numbers: np.std(numbers)
 variance = lambda numbers: stdev(numbers)**2
 
+# Permutations for "r" number of objects from a total of "n" number of objects
+nPr = lambda n, r, rep=False: factorial(n) / factorial(n-r) if not rep else n**r
+
+
+
