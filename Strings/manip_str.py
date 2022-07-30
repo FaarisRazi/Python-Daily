@@ -39,7 +39,7 @@ def word_counts(text):
 
     return counts
 
-# Get random string of characters
+# Get random string of "n" number of characters (or n-sized string)
 def randchr(n=len(printable), join=''):
     chrs = list(printable)
     shuffle(chrs)
