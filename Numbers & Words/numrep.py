@@ -3,6 +3,23 @@ alphabets = "abcdefghijklmnopqrstuvwxyz"
 # Check if a number is "Odd" or "Even" (decimals ignored, base/integer numbers used)
 oddeven = lambda x: 'Odd' if int(x)%2 else 'Even'
 
+# Check if the object is Numeric (integer/float)
+def is_number(x, nobool=True):
+    # nobool = True -> To exclude boolean objects as being numeric.
+    if isinstance(x, (int, float)):
+        
+        if isinstance(x, bool) and nobool:
+            return False
+            
+        return True
+
+    elif isinstance(x, str):
+        if x.count('.') == 1 and x.strip().replace('.','').isdigit():
+            return True     
+
+    return False
+
+
 # Truncate a number (eg; truncate to 3 decimals: 1.2599999 to 1.259)
 def trunc(x, dp=3):
     
