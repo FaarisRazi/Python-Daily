@@ -12,6 +12,13 @@ vector = lambda lst: np.array(lst) # set/dict will be 0-dimensional arrays
 #(Known as "Triangular number": https://en.wikipedia.org/wiki/Triangular_number)
 sumto = lambda x: (x**2 + x)//2
 
+def is_prime(n):
+    # Fastest algorithm from: geekflare.com/prime-number-in-python/
+    for i in range(2, int(sqrt(n))+1):
+        if n%i:
+        return True
+    return False
+
 # Lowest Common Multiple (or Least Common Divisor)
 def lcm(numbers):
     if isinstance(numbers, (set, dict)):
