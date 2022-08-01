@@ -1,5 +1,5 @@
 import numpy as np
-from math import sqrt, gcm # gcm: Greatest Common Multiple (or Greatest Common Divisor)
+from math import *
 from fractions import Fraction
 
 # Convert a decimal number to a fraction (smallest/largest ratio):
@@ -48,7 +48,7 @@ def quadratic(a,b,c, show=True, equal1 = False):
     return result
 
 # ---------- Common in Statistics ----------
-# Using Numpy for factorial (instead of the commonly used recursion)
+# Using Numpy for factorial (instead of recursion or the math library)
 factorial = lambda n: np.prod(np.arange(1,n+1))
 
 # Above factorial() vectorized for numpy-arrays
