@@ -12,11 +12,12 @@ vector = lambda lst: np.array(lst) # set/dict will be 0-dimensional arrays
 #(Known as "Triangular number": https://en.wikipedia.org/wiki/Triangular_number)
 sumto = lambda x: (x**2 + x)//2
 
+# Check if a number is Prime (else it is Composite).
 def is_prime(n):
     # Fastest algorithm from: geekflare.com/prime-number-in-python/
     for i in range(2, int(sqrt(n))+1):
         if n%i:
-        return True
+            return True
     return False
 
 # Lowest Common Multiple (or Least Common Divisor)
@@ -25,7 +26,7 @@ def lcm(numbers):
         numbers = tuple(numbers)
         
     return np.lcm.reduce(numbers)
-
+    
 
 # Get x solutions for your quadratic equation: ax^2 + bx + c
 def quadratic(a,b,c, show=True, equal1 = False): 
@@ -46,6 +47,13 @@ def quadratic(a,b,c, show=True, equal1 = False):
         result = 1/result * -1 # Return factorized x equations as = 1.
     
     return result
+
+# ---------- Geometry Functions ----------
+def pythogarus(a,b,c): 
+    result = sqrt(a**2 + b**2) # Result for C
+    
+    # Still making the func
+
 
 # ---------- Common in Statistics ----------
 # Using Numpy for factorial (instead of recursion or the math library)
