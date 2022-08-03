@@ -10,6 +10,11 @@ vf_0at = lambda v0,a,t: v0 ± a*t
 vf_0xt = lambda v0,x,t: 2*x/t - v0
 vf_0ax = lambda v0,a,x: sqrt(v0**2 + 2*a*x)
 
+# Initial Velocity
+v0_fat = lambda vf,a,t: vf - a*t
+v0_fxt = lambda vf,x,t: 2*x/t - vf
+v0_fax = lambda vf,a,x: sqrt(vf**2 - 2*a*x)
+
 # Displacement
 x_v0at = lambda v0, a, t: v0*t ± 0.5*a*t**2
 x_v0ft = lambda v0, vf, t: 0.5*(v0 + vf)*t
