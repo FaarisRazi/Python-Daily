@@ -8,9 +8,9 @@ fraction = lambda x, lowest=True: Fraction(x).limit_denominator() if lowest else
 # Convert list/tuple into array of numbers
 vector = lambda lst: np.array(lst) # set/dict will be 0-dimensional arrays
 
-# Sum numbers 1 upto x.
+# Sum numbers from a starting number (default start = 0) upto a final (x).
 #(Known as "Triangular number": https://en.wikipedia.org/wiki/Triangular_number)
-sumto = lambda x: (x**2 + x)//2
+sumfrom = lambda x, start=0: (x**2 + x)//2 - (start**2 + start)//2
 
 # Check if a number is Prime (else it is Composite).
 def is_prime(n):
