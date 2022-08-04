@@ -10,7 +10,15 @@ symbols = printable[62:]
 str_in_bracs = lambda s: re.search(r"\(([A-Za-z0-9_]+)\)", s)
 
 # Keep only alphabets inside text
-filter_alpha = lambda s: ''.join(filter(lambda x: x.isalpha(), s))
+only_letters = lambda s: ''.join(filter(lambda x: x.isalpha(), s))
+
+# Convert a string to in an alternating upper and lower case fashion
+def altercaps(s, capstart=True): 
+    # capstart = True you want to start your string as upper-case, followed then by alternating caps.
+    if startcap:
+        return ''.join([chr.upper() if i%2 else chr.lower() for i, chr in enumerate(s, 1)])
+    return ''.join([chr.upper() if not i%2 else chr.lower() for i, chr in enumerate(s, 1)])
+
 
 # Multi-replace: Replace multiple sub-strings within a string
 def mreplace(text, to_replace):
