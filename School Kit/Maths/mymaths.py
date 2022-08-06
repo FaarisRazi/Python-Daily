@@ -28,6 +28,27 @@ def lcm(numbers):
     return np.lcm.reduce(numbers)
 
 
+# Get x solutions for your quadratic equation: ax^2 + bx + c
+def quadratic(a,b,c, show=True, equal1 = False): 
+    # Example for x^2 - 5x + 6 = quadratic(1,-5,6):
+    # Factorized: (x - 3)(x - 2)
+    # [3. 2.]
+    
+    # Quadratic formula: (-b +- sqrt(b^2 - 4ac))/2a
+    result = (-b + np.array((1,-1))*sqrt(b**2 - 4*a*c))/(2*a)
+
+    if show:
+        eq = '(x + %.4g)'
+        print('Factorized: '+ 
+              ''.join(map(lambda x: eq%x if x>0 else (eq%x).replace('+ -', '- '),
+                          result * -1))
+              )
+    if equal1:
+        result = 1/result * -1 # Return factorized x equations as = 1.
+    
+    return result
+
+# ---------- Geometry Functions ----------
 # Pythogarus Theorum (c^2 = a^2 + b^2)
 def pythogarus(show=True, c=False, bad_sqrt=False, **kwargs):
     # Pass any two parameters with their values, examples with formula equivalence:
@@ -57,34 +78,7 @@ def pythogarus(show=True, c=False, bad_sqrt=False, **kwargs):
             print(comment % (y, x, inner**0.5))
 
         return inner**0.5
-    
-
-# Get x solutions for your quadratic equation: ax^2 + bx + c
-def quadratic(a,b,c, show=True, equal1 = False): 
-    # Example for x^2 - 5x + 6 = quadratic(1,-5,6):
-    # Factorized: (x - 3)(x - 2)
-    # [3. 2.]
-    
-    # Quadratic formula: (-b +- sqrt(b^2 - 4ac))/2a
-    result = (-b + np.array((1,-1))*sqrt(b**2 - 4*a*c))/(2*a)
-
-    if show:
-        eq = '(x + %.4g)'
-        print('Factorized: '+ 
-              ''.join(map(lambda x: eq%x if x>0 else (eq%x).replace('+ -', '- '),
-                          result * -1))
-              )
-    if equal1:
-        result = 1/result * -1 # Return factorized x equations as = 1.
-    
-    return result
-
-# ---------- Geometry Functions ----------
-def pythogarus(a,b,c): 
-    result = sqrt(a**2 + b**2) # Result for C
-    
-    # Still making the func
-
+ 
 
 # ---------- Common in Statistics ----------
 # Using Numpy for factorial (instead of recursion or the math library)
