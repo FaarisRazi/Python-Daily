@@ -1,7 +1,7 @@
 # Physics Formulae/Functions to be added InshaAllah
 from math import sqrt
 
-# ------------------ Kinematics ------------------
+# ------------------ 1D Kinematics ------------------
 #(vf = Final Velocity, v0 = Initial Velocity, a = acceleration, 
 # x = displacement, t = time)
 
@@ -28,3 +28,8 @@ t_v0fx = lambda v0, vf, x: 2*x / (v0 + v)
 a_v0ft = lambda v0, vf, t: (v - v0)/t
 a_v0xt = lambda v0, x, t: 2*(x - v0*t)/t**2)
 a_v0fx = lambda v0, vf, x: 0.5*(vf**2 - v0**2)/x
+
+# ------------------ 2D Kinematics ------------------
+g = 9.8 # Acceleration due to gravity.
+ax_proj, ay_proj = 0, -g # Accelerations (x and y) at projectile.
+
