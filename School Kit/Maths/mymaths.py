@@ -50,30 +50,23 @@ def quadratic(a,b,c, show=True, equal1 = False):
 
 # ---------- Geometry Functions ----------
 # Pythogarus Theorum (c^2 = a^2 + b^2)
-def pythogarus(show=True, c=False, bad_sqrt=False, **kwargs):
+def pythogarus(show=True, c=False, **kwargs):
     # Pass any two parameters with their values, examples with formula equivalence:
     # pythogarus(a=1, b=2) gives:           sqrt(a^2 + b^2), traditional way of finding c.
-    # pythogarus(g=3, h=4, c=True):         sqrt(h^2 - g^2), c = True: c = h, g = b or a (h > g, as c > b or a)
-    # (bad_sqrt: to ignore/convert a negative square-root to a positive one)
+    # pythogarus(g=3, h=4, c=True):         sqrt(h^2 - g^2), c = True: sqrt((largest value)^2 - (smallest value)^2)
 
     comment = 'sqrt( %.4g^2 + %.4g^2 ) = %.4g'
 
     if len(kwargs) == 2:
 
-        x, y = [*map(kwargs.get, sorted(kwargs))]
+        smaller, bigger = sorted(kwargs, key=kwargs.get)
+        y, x = kwargs[bigger], kwargs[smaller]
+        inner = y**2 + x**2
         
         if c:
-            inner = y**2 - x**2
+            inner -= 2*(x**2)
             comment = comment.replace('+','-')
-        else:
-            inner = y**2 + x**2
-
-        if bad_sqrt: 
-            inner = abs(inner)
-
-        elif inner < 0:
-            raise ValueError
-
+    
         if show:
             print(comment % (y, x, inner**0.5))
 
