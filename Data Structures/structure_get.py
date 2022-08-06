@@ -6,6 +6,11 @@ is_structure = lambda x: isinstance(x, types)
 # Retrieve unique lists/tuples from a nested-list (eg; [[1,2], [2,1]] => [1,2]).
 unique_lists = lambda nested_list: list(set([tuple(sorted(i)) for i in nested_list]))
 
+# Sort a dictionary by it's keys (by="k") or values (by="v")
+def sort_dict(x, by='k', reverse=False):
+    sort_rule = {'k':0, 'v':1}
+    return dict(sorted(x.items(), key=lambda x: x[sort_rule[by]], reverse=reverse))
+    
 
 # Flatten a data-structure of nested items.
 def flatten(x):
