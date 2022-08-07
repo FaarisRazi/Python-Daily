@@ -25,3 +25,10 @@ def webtables(target_url, disc=True):
         p.feed(xhtml)
     
     return p.tables
+
+# Get HTML-tables from a string containing HTML (utf decoded if string = False)
+def html_string_tables(HTML_STRING, string=True):
+    xhtml = HTML_STRING.read().decode('utf-8') if not string else HTML_STRING
+    p = HTMLTableParser()
+    p.feed(xhtml)
+    return p.tables
