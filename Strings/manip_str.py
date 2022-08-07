@@ -53,3 +53,21 @@ def randchr(n=len(printable), join=''):
     shuffle(chrs)
 
     return join.join(chrs)[:n+1]
+
+
+# Sort a string based on by all characters (or words) alphabetically
+def str_sort(x, by='w', reverse=False):
+    by_format = by.lower().strip()
+    xtype = type(x)
+    
+    if not isinstance(x, str):
+        raise TypeError(f"Invalid {xtype} input, only strings/text allowed (enclosed within \"\" or '' quotation marks).")
+    
+    if by_format in {'w','word','words'}:
+        return ' '.join(sorted(x.split(), reverse=reverse))
+    
+    elif by_format in {'c','chr','chrs', 'character', 'characters'}:
+        return ''.join(sorted(x), reverse=reverse)
+    
+    raise ValueError(f"Invalid 'by' input, only valid options are in word format (by='w'/'word'/'words')\n"+
+                     "or character format (by='c'/'chr'/'chrs'/'character'/'characters')")
