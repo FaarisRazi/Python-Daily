@@ -1,6 +1,6 @@
 # Note: Data Structures will often be referred in short as "basket" in this script.
 
-types = (list, tuple, set, dict, str)
+types = [list, tuple, set, dict, str]
 
 # To check if an object/data is a data-structure (one of "types" above).
 is_structure = lambda x: isinstance(x, types)
@@ -94,18 +94,20 @@ def ragged(basket=[], nests=5, start=0, stop=0, inner=list):
 
 
 # (Incomplete) Shuffle a basket of items and/or items within sub-baskets
+# Thinking of including range-objects
 def shuffle_basket(x, inner=False, outer=True):
     from random import shuffle
     basket = type(x)
 
     if outer:
-        if isinstance(x, dict):
+        if basket == dict:
             x = x.items()
-
-        shuffle(x)
+        x = list(x)
+        
+    shuffle(x)
 
     if inner:
-        if isinstance(x, dict):
+        if basket == dict:
             for k,v in x.items():
                 if isinstance(v, types):
                     x[k] = shuffle_basket(v)
@@ -115,10 +117,10 @@ def shuffle_basket(x, inner=False, outer=True):
             
             for i in range(len(x)):
                 item = x[i]
-                
+
                 if isinstance(item, types):
                     x[i] = shuffle_basket(item)
-
+                    
     return basket(x)
 
 
