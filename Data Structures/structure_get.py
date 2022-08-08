@@ -93,17 +93,17 @@ def ragged(basket=[], nests=5, start=0, stop=0, inner=list):
     return lst
 
 
-# (Incomplete) Shuffle a basket of items and/or items within sub-baskets
-# Thinking of including range-objects
+# Shuffle a basket of items and/or items within sub-baskets (also range-objects)
 def shuffle_basket(x, inner=False, outer=True):
     from random import shuffle
     basket = type(x)
+    types += [range]
 
     if outer:
         if basket == dict:
             x = x.items()
-        x = list(x)
-        
+        x = list(x) # Also taking care of range objects
+
     shuffle(x)
 
     if inner:
@@ -120,8 +120,8 @@ def shuffle_basket(x, inner=False, outer=True):
 
                 if isinstance(item, types):
                     x[i] = shuffle_basket(item)
-                    
-    return basket(x)
+
+    return basket(x) if basket != range else x
 
 
 # Get a random data-structure/"basket" (list/tuple.. etc) containing random characters/numbers.
