@@ -28,3 +28,10 @@ def geometric(p, x, sumto=False):
   formula = lambda x: p * (1-p)**(x-1)
   
   return formula(x) if not sumto else sum(map(formula, distrange(sumto)))
+
+
+# Possion Distribution
+def pois(x, lamda, sumto=False):
+  formula = lambda x: (lamda**x)/factorial(x) * e**-lamda
+  
+  return formula(x) if not sumto else sum(map(formula, distrange(sumto)))
