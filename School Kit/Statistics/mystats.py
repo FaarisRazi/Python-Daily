@@ -18,13 +18,13 @@ def distrange(x, sumto):
     return sumto
         
 # HyperGeometric Distribution
-def hypergeom(N, Ns, n, x, sumto=False): 
+def hypergeom(x, Ns, N, n, sumto=False): 
   formula = lambda x: ( nCr(Ns,x) * nCr(N-Ns,n-x) ) / nCr(N,n)
   
   return formula(x) if not sumto else sum(map(formula, distrange(sumto)))
 
 # Geometric Distribution
-def geom(p, x, sumto=False):
+def geom(x, p, sumto=False):
   formula = lambda x: p * (1-p)**(x-1)
   
   return formula(x) if not sumto else sum(map(formula, distrange(sumto)))
@@ -38,8 +38,8 @@ def pois(x, lamda, sumto=False):
 
 
 # Binomial Distribution
-def binom(x, p, N): 
-    formula = lambda x: nCr(N,x) * (p**x) * ((1 - p)**(N-x))
+def binom(x, p, N, sumto=False): 
+    formula = lambda x: nCr(N,x)  *  p**x  *  (1 - p)**(N-x)
     
     return formula(x) if not sumto else sum(map(formula, distrange(sumto)))
 
@@ -50,3 +50,8 @@ def bernoulli(x, p):
         return binom(x, p, N=1)
     
     raise ValueError('Invalid \'x\' input, only values 0 or 1 allowed.')
+
+def negbinom(x, p, r, sumto=False):
+    formula = lambda x: nCr(x-1, r-1)  *  p**r  *  q**(x-r)
+    
+    return formula(x) if not sumto else sum(map(formula, distrange(sumto)))
