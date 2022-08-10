@@ -52,6 +52,11 @@ def quadratic(a,b,c, show=True, equal1 = False):
 torad = lambda x_degree: x_degree * pi/180 # "radians" is available in the math-library
 todegree = lambda x_rad: x_rad * 180/pi # Convert some x degrees to radian form. 
 
+# Finding angles (theta) for right-angled triangles:
+soh = lambda opp, hyp: asin(opp/hyp) # Sin-method (when only 'opposite' and 'hypotenuse' are available)
+cah = lambda adj, hyp: acos(adj/hyp) # Cosine-method (when 'adjacent' and 'hypotenuse' are available)
+toa = lambda opp, adj: atan(opp/adj) # Tan-method (when 'opposite' and 'adjacent' available)
+
 # Pythogarus Theorum (c^2 = a^2 + b^2)
 def pythogarus(show=True, c=False, **kwargs):
     # Pass any two parameters with their values, examples with formula equivalence:
