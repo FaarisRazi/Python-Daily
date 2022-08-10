@@ -50,7 +50,7 @@ def quadratic(a,b,c, show=True, equal1 = False):
 
 # ---------- Geometry Functions ----------
 torad = lambda x_degree: x_degree * pi/180 # "radians" is available in the math-library
-
+todegree = lambda x_rad: x_rad * 180/pi # Convert some x degrees to radian form. 
 
 # Pythogarus Theorum (c^2 = a^2 + b^2)
 def pythogarus(show=True, c=False, **kwargs):
