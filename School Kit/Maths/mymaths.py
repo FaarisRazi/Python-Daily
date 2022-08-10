@@ -2,6 +2,17 @@ import numpy as np
 from math import *
 from fractions import Fraction
 
+# Times table for some x number, with a table range (default from 0 to 10).
+def timestable(x, from=0, to=10, only_show=True, asdict=True):
+    table_range = range(from, to+1)
+    
+    if only_show:
+        for i in table_range:
+            print(f"{x} x {i} =", x*i)
+    else:
+        return {'{x}x{i}':x*i for i in table_range} if asdict else [x*i for i in table_range]
+        
+
 # Convert a decimal number to a fraction (smallest/largest ratio):
 fraction = lambda x, lowest=True: Fraction(x).limit_denominator() if lowest else '%d/%d'%(x.as_integer_ratio())
 
