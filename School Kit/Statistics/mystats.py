@@ -51,7 +51,11 @@ def bernoulli(x, p):
     
     raise ValueError('Invalid \'x\' input, only values 0 or 1 allowed.')
 
+# Negative Binomial Distribution
 def negbinom(x, p, r, sumto=False):
     formula = lambda x: nCr(x-1, r-1)  *  p**r  *  q**(x-r)
     
     return formula(x) if not sumto else sum(map(formula, distrange(sumto)))
+    
+# Uniform Distribution
+uniform = lambda a, b: 1/(b-a)
