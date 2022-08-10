@@ -49,6 +49,9 @@ def quadratic(a,b,c, show=True, equal1 = False):
     return result
 
 # ---------- Geometry Functions ----------
+torad = lambda x_degree: x_degree * pi/180 # "radians" is available in the math-library
+
+
 # Pythogarus Theorum (c^2 = a^2 + b^2)
 def pythogarus(show=True, c=False, **kwargs):
     # Pass any two parameters with their values, examples with formula equivalence:
