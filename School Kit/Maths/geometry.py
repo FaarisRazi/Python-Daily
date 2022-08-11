@@ -1,7 +1,7 @@
 import numpy as np
 from math import *
 
-# ---------- Geometry Functions ----------
+# ---------- General Geometry Functions ----------
 torad = lambda x_degree: x_degree * pi/180 # "radians" is available in the math-library
 todegree = lambda x_rad: x_rad * 180/pi # Convert some x degrees to radian form. 
 
@@ -32,3 +32,23 @@ def pythogarus(show=True, c=False, **kwargs):
             print(comment % (y, x, inner**0.5))
 
         return inner**0.5
+    
+    
+# ---------- Area-finder functions ----------
+right_triangle = lambda base, height: 0.5 * base*height
+
+class isosceles:
+    def __init__(self, angle, twin_angle=True, side, twin_sides=True):
+        if angle >= 90:
+            raise ValueError("Twin-angles cannot be greater than or equal to 90 degrees.")
+        
+        self.focal_angle = self.twin_angle = angle
+        self.focal_side = self.twin_side = side
+                
+        if twin_angles:
+            self.focal_angle = 180 - angle*2
+        else:
+            self.twin_angle = (180 - angle)/2
+            
+#         if twin_sides:
+#             self.focal_side
