@@ -5,6 +5,13 @@ types = [list, tuple, set, dict, str]
 # To check if an object/data is a data-structure (one of "types" above).
 is_structure = lambda x: isinstance(x, types)
 
+# Valid Data-Structure Handler for functions.
+def valid_basket(x):
+    if is_structure(x):
+        return x
+    raise ValueError(f"Invalide {basket} input, only data-structures"+
+                          "\n(list, tuple, set, dict, str) allowed."  )
+
 # Retrieve unique lists/tuples from a nested-list (eg; [[1,2], [2,1]] => [1,2]).
 unique_lists = lambda nested_list: list(set([tuple(sorted(i)) for i in nested_list]))
 
@@ -19,9 +26,7 @@ def flatten(x):
     # Example lst = [[1], {2,3}, (4,5), 6, "seven"]:
     # flatten(lst) = [1, 2, 3, 4, 5, 6, 'seven']
     
-    if not is_structure(x):
-        raise ValueError(f"Invalide {basket} input, only data-structures"+
-                          "\n(list, tuple, set, dict, str) allowed."  )
+    x = valid_basket(x)
     basket = type(x)
     xlist = [list(i) if not isinstance(i, (int, float, str)) else [i] for i in x]
 
