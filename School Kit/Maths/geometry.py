@@ -35,6 +35,17 @@ def pythogarus(show=True, c=False, **kwargs):
     
     
 # ---------- Area-finder functions ----------
+class triangle:
+# To be worked on...
+    
+    def __init__(self, angle, twin_angle=True, side, twin_sides=True):
+        self.angle = angle
+        # To be worked on...
+    
+    def right_angled(self, a, b, c):
+        return 
+        # To be worked on...
+    
 right_triangle = lambda base, height: 0.5 * base*height
 
 class isosceles:
