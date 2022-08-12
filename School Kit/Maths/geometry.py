@@ -2,8 +2,8 @@ import numpy as np
 from math import *
 
 # ---------- General Geometry Functions ----------
-torad = lambda x_degree: x_degree * pi/180 # "radians" is available in the math-library
-todegree = lambda x_rad: x_rad * 180/pi # Convert some x degrees to radian form. 
+rad = lambda x_degree: x_degree * pi/180 # "radians" is available in the math-library
+deg = lambda x_rad: x_rad * 180/pi # Convert some x degrees to radian form. 
 
 # Finding angles (theta) for right-angled triangles:
 soh = lambda opp, hyp: asin(opp/hyp) # Sin-method (when only 'opposite' and 'hypotenuse' are available)
