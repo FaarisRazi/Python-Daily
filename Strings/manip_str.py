@@ -47,6 +47,7 @@ def word_counts(text):
 
     return counts
 
+
 # Get random string of "n" number of characters (or n-sized string)
 def randchr(n=len(printable), join=''):
     chrs = list(printable)
@@ -71,3 +72,11 @@ def str_sort(x, by='w', reverse=False):
     
     raise ValueError(f"Invalid 'by' input, only valid options are in word format (by='w'/'word'/'words')\n"+
                      "or character format (by='c'/'chr'/'chrs'/'character'/'characters')")
+
+# Convert strings to their ordinal form.
+def ordinal(x, as_str=True):
+    if as_str:
+        id_list = [ord(i) for i in x if isinstance(i, str)]
+    else:
+        id_list = ''.join([str(ord(i)) for i in x if isinstance(i, str)])
+    return id_list
