@@ -27,7 +27,11 @@ def flatten(x):
 
     return basket(sum(xlist, []))
 
-
+# Pack items in your basket to a sub-basket of items.
+def packup(x):
+    # To be worked on
+    return
+    
 # Split a data-structure's items to even-split (nested) chunks of items
 import numpy as np
 def even_chunks(basket, nchunks=2):
