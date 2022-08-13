@@ -42,7 +42,7 @@ def mreplace(text, to_replace):
 
 
 # Get counts of unique sub-strings/words in a string
-def word_counts(text, exclude=[]):
+def word_count(text, exclude=[]):
     counts = {}
     
     if exclude:
@@ -58,9 +58,12 @@ def word_counts(text, exclude=[]):
 
 
 # Collect and/or count sentences inside a string/text.
-def sentences(text, aslist=False, count=True):
+def sentences(text, aslist=False, count=True, exclude=[]):
     sents, result = [], None
-
+    
+    if exclude:
+        text = mreplace(text, exclude)
+    
     for i in text.split('.'):
         i = i.strip()
         for j in i.split('?'):
