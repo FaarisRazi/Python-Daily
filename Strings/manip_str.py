@@ -38,7 +38,6 @@ def mreplace(text, to_replace):
 # Get counts of unique sub-strings/words in a string
 def word_counts(text):
     counts = {}
-
     for word in text.split():
         if word in counts.keys():
             counts[word] += 1
@@ -46,6 +45,30 @@ def word_counts(text):
             counts[word] = 1
 
     return counts
+
+
+# Collect and/or count sentences inside a string/text.
+def sentences(x, aslist=False, count=True):
+    sents, result = [], None
+
+    for i in x.split('.'):
+        i = i.strip()
+        for j in i.split('?'):
+            j = j.strip()
+            for k in j.split('!'):
+                k = k.strip()
+                sents.append(k)
+        if i == '':
+            break
+
+    if count and aslist:
+        result = {'count':len(sents), 'sentences':sents}
+    elif count: 
+        result = len(sents)
+    elif aslist:
+        result = sents
+
+    return result
 
 
 # Get random string of "n" number of characters (or n-sized string)
