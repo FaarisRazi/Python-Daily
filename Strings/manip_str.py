@@ -48,10 +48,10 @@ def word_counts(text):
 
 
 # Collect and/or count sentences inside a string/text.
-def sentences(x, aslist=False, count=True):
+def sentences(text, aslist=False, count=True):
     sents, result = [], None
 
-    for i in x.split('.'):
+    for i in text.split('.'):
         i = i.strip()
         for j in i.split('?'):
             j = j.strip()
