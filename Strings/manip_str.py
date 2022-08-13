@@ -42,8 +42,12 @@ def mreplace(text, to_replace):
 
 
 # Get counts of unique sub-strings/words in a string
-def word_counts(text):
+def word_counts(text, exclude=[]):
     counts = {}
+    
+    if exclude:
+        text = mreplace(text, exclude)
+        
     for word in text.split():
         if word in counts.keys():
             counts[word] += 1
