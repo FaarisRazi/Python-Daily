@@ -12,6 +12,9 @@ str_in_bracs = lambda s: re.search(r"\(([A-Za-z0-9_]+)\)", s)
 # Keep only alphabets inside text
 only_letters = lambda s: ''.join(filter(lambda x: x.isalpha(), s))
 
+# Total count of characters in your string/text (optional: exclude="word/character")
+chr_count = lambda text, exclude=[]: len(mreplace(text, exclude)) if exclude else len(text)
+
 # Convert a string to in an alternating upper and lower case fashion
 def altercaps(s, capstart=True): 
     # capstart = True you want to start your string as upper-case, followed then by alternating caps.
@@ -23,14 +26,17 @@ def altercaps(s, capstart=True):
 # Multi-replace: Replace multiple sub-strings within a string
 def mreplace(text, to_replace):
     # to_replace = dict -> {old_text : new_text, ...}
-    
-    # If "to_replace" passed as a list/tuple/set/str,
-    # remove these items within the text automatically.
-    if isinstance(to_replace, (list, tuple, set)): 
-        to_replace = {item:'' for item in to_replace}
-        
-    for old, new in to_replace.items(): #Replace all substrings
-        text = text.replace(old, new) #with new vals
+    if to_replace:
+        if isinstance(to_replace, str):
+            to_replace = {item:'' for item in to_replace.split()}
+                
+        # If "to_replace" passed as a list/tuple/set/str,
+        # remove these items within the text automatically.
+        if isinstance(to_replace, (list, tuple, set)): 
+            to_replace = {item:'' for item in to_replace}
+
+        for old, new in to_replace.items(): #Replace all substrings
+            text = text.replace(old, new) #with new vals
         
     return text
 
@@ -95,6 +101,7 @@ def str_sort(x, by='w', reverse=False):
     
     raise ValueError(f"Invalid 'by' input, only valid options are in word format (by='w'/'word'/'words')\n"+
                      "or character format (by='c'/'chr'/'chrs'/'character'/'characters')")
+
 
 # Convert strings to their ordinal form.
 def ordinal(x, as_str=True):
