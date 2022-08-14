@@ -37,6 +37,17 @@ def pythogarus(show=True, c=False, **kwargs):
 cot = lambda theta: 1/tan(theta) # Or: cos(theta)/sin(theta)
 csc = lambda theta: 1/sin(theta)
 sec = lambda theta: 1/cos(theta)
+sin_2 = lambda theta: 2*sin(theta)*cos(theta) # sin(2*theta) function
+
+def cos_2(theta, use_cos=True, use_sin=True): # cos(2*theta) function
+    if (use_cos + use_sin) in {0, 2}:
+        return cos(theta)**2 - sin(theta)**2
+    
+    elif use_cos:
+        return 2*cos(theta)**2 - 1
+    
+    return 1 - 2*sin(theta)**2 # Else use only with sin()
+    
 
 # ---------- Area-finder functions ----------
 class triangle:
