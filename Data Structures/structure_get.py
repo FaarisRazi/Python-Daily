@@ -21,7 +21,22 @@ unique_lists = lambda nested_list: list(set([tuple(sorted(i)) for i in nested_li
 def sort_dict(x, by='k', reverse=False):
     sort_rule = {'k':0, 'v':1}
     return dict(sorted(x.items(), key=lambda x: x[sort_rule[by]], reverse=reverse))
+
+
+# Convert values to keys and vice versa (dictionaries for now).
+switch_items(x, collect=True):
+    result = {}
     
+    if collect:
+        for k, v in x.items():
+            if v not in collections.keys():
+                result[v] = [k]
+            else:
+                result[v].append(k)
+     else:
+         result = {v:k for k,v in x.items()}
+
+    return result
 
 # Flatten a data-structure of nested items.
 def flatten(x):
