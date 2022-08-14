@@ -57,7 +57,7 @@ def word_count(text, exclude=[]):
     return counts
 
 
-# Collect and/or count sentences inside a string/text.
+# Collect and/or count sentences from strings/text.
 def sentences(text, aslist=False, count=True, exclude=[]):
     sents, result = [], None
     
@@ -73,7 +73,8 @@ def sentences(text, aslist=False, count=True, exclude=[]):
                 sents.append(k)
         if i == '':
             break
-
+    
+    # Return type
     if count and aslist:
         result = {'count':len(sents), 'sentences':sents}
     elif count: 
@@ -81,6 +82,21 @@ def sentences(text, aslist=False, count=True, exclude=[]):
     elif aslist:
         result = sents
 
+    return result
+
+
+# Collect and/or count paragraphs from strings/text.
+def paragraphs(text, aslist=False, count=True, exclude=[]):
+    paras = text.split('\n') # Starting example for the work, to be continued...
+    
+    # Return type
+    if count and aslist:
+        result = {'count':len(paras), 'paras':paras}
+    elif count: 
+        result = len(paras)
+    elif aslist:
+        result = paras
+        
     return result
 
 
