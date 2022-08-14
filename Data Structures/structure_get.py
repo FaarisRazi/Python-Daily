@@ -12,8 +12,10 @@ def valid_basket(x):
     raise ValueError(f"Invalide {basket} input, only data-structures"+
                           "\n(list, tuple, set, dict, str) allowed."  )
 
+    
 # Retrieve unique lists/tuples from a nested-list (eg; [[1,2], [2,1]] => [1,2]).
 unique_lists = lambda nested_list: list(set([tuple(sorted(i)) for i in nested_list]))
+
 
 # Sort a dictionary by it's keys (by="k") or values (by="v")
 def sort_dict(x, by='k', reverse=False):
@@ -32,11 +34,21 @@ def flatten(x):
 
     return basket(sum(xlist, []))
 
+
 # Pack items in your basket to a sub-basket of items.
-def packup(x):
+def packup(x, even=True):
     # To be worked on
-    return
     
+    if isinstance(even, int) and even != True:
+        return even_chunks(x, even)
+    
+    elif even == 1:
+        return [[i] for i in x]
+    
+    # To be worked on further...
+    return
+
+
 # Split a data-structure's items to even-split (nested) chunks of items
 import numpy as np
 def even_chunks(basket, nchunks=2):
