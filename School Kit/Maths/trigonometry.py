@@ -33,7 +33,11 @@ def pythogarus(show=True, c=False, **kwargs):
 
         return inner**0.5
     
-    
+# ---------- Trigonometric Identities (TBC) ----------
+cot = lambda theta: 1/tan(theta) # Or: cos(theta)/sin(theta)
+csc = lambda theta: 1/sin(theta)
+sec = lambda theta: 1/cos(theta)
+
 # ---------- Area-finder functions ----------
 class triangle:
 # To be worked on...
