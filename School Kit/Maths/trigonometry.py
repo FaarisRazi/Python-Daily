@@ -12,6 +12,7 @@ toa = lambda opp, adj: atan(opp/adj) # Tan-method (when 'opposite' and 'adjacent
 
 opp = lambda theta, side, use_hyp=True: sin(theta)*side if use_hyp else tan(theta)*side # Else: side = Adjacent (adj)
 adj = lambda theta, side, use_hyp=True: cos(theta)*side if use_hyp else side/tan(theta) # Else: side = Opposite (opp)
+hyp = lambda theta, side, use_opp=True: side/sin(theta) if use_opp else side/cos(theta) # Else: side = Adjacent (adj)
 
 
 # Pythogarus Theorum (c^2 = a^2 + b^2)
