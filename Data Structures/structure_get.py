@@ -23,20 +23,28 @@ def sort_dict(x, by='k', reverse=False):
     return dict(sorted(x.items(), key=lambda x: x[sort_rule[by]], reverse=reverse))
 
 
-# Convert values to keys and vice versa (dictionaries for now).
+# Switch key-value pairs and list of two-item-sublists.
 switch_items(x, collect=True):
+    basket = valid_basket(x)
     result = {}
     
+    if isinstance(x, dict):
+        basket = x.items()
+        
     if collect:
-        for k, v in x.items():
+        for k, *v in basket:
+            if isinstance(v, list):
+                    v = v[0] # Using first-item from value-lists for now
+
             if v not in collections.keys():
                 result[v] = [k]
             else:
                 result[v].append(k)
      else:
-         result = {v:k for k,v in x.items()}
+         result = {v:k for k,v in basket}
 
     return result
+
 
 # Flatten a data-structure of nested items.
 def flatten(x):
