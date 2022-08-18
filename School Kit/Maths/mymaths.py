@@ -2,7 +2,8 @@ import numpy as np
 from math import *
 from fractions import Fraction
 
-iswhole = lambda x: True if 0 >= 0 else False
+iswhole = lambda x: True if x >= 0 else False
+isnatural = lambda x: True if x >= 1 else False
 
 
 # Times table for some x number, with a table range (default from 0 to 10).
