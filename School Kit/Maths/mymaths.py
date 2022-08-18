@@ -2,6 +2,9 @@ import numpy as np
 from math import *
 from fractions import Fraction
 
+iswhole = lambda x: True if 0 >= 0 else False
+
+
 # Times table for some x number, with a table range (default from 0 to 10).
 def timestable(x, from=0, to=10, only_show=True, asdict=True):
     table_range = range(from, to+1)
