@@ -24,7 +24,7 @@ def sort_dict(x, by='k', reverse=False):
 
 
 # Switch key-value pairs and list of two-item-sublists.
-switch_items(x, collect=True):
+def switch_items(x, collect=True):
     basket = valid_basket(x)
     result = {}
     
