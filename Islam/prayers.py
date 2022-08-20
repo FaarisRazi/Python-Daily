@@ -61,3 +61,19 @@ if prayers_file:
 else:
     prayers_df = khaleej_prayers(month_now)
     print(file_comment + ' (and saved)')
+
+# -------------- Variables to be used ---------------
+today_info = prayers_df[prayers_df[month_now] == today.day]
+month_days_left = prayers_df.loc[today_info.index[0]:]
+
+days_left = month_days_left.shape[0]-1
+days_comment = '%d days left for '+month_now
+
+
+if days_left:
+    print(days_comment%days_left)
+else:
+    print('Today is the last day '+days_comment.split()[-1][:-1]+'-day')
+    
+print(month_days_left.shape[0]-1,)
+today_prayers = today_info.T[4:].rename(columns={today_info.index[0]:'times'}).rename_axis('prayers')
