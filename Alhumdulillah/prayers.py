@@ -58,6 +58,7 @@ def prayersDF():
     return khaleej_prayers(month_now)
         
 
-#prayers_df = prayersDF()
+# prayers_df = prayersDF() # Load our new/saved dataframe
 
-#prayers_df.head()
+# today_info = prayers_df[prayers_df[month_now] == today.day]
+# today_prayers = today_info.T[4:].rename(columns={today_info.index[0]:'times'}).rename_axis('prayers')
