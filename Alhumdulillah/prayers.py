@@ -62,3 +62,8 @@ def prayersDF():
 
 # today_info = prayers_df[prayers_df[month_now] == today.day]
 # today_prayers = today_info.T[4:].rename(columns={today_info.index[0]:'times'}).rename_axis('prayers')
+
+# month_days_left = prayers_df.loc[today_info.index[0]:]
+
+# days_left = month_days_left.shape[0]-1
+# days_comment = '%d days left for '+month_now
