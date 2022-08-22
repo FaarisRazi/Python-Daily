@@ -67,3 +67,11 @@ def prayersDF():
 
 # days_left = month_days_left.shape[0]-1
 # days_comment = '%d days left for '+month_now
+
+# iqamah = {i:pd.Timedelta(minutes=j) if j else np.nan 
+#           for i,j in zip(today_prayers.index, [20,0,15,15,2,15])}
+
+# prayers_astime = pd.to_datetime(today_prayers.times, format='%I:%M %p')
+
+# today_prayers['iqamah'] = prayers_astime.values + today_prayers.index.map(iqamah.get).values
+# today_prayers['iqamah'] = today_prayers['iqamah'].dt.strftime('%I:%M %p')
