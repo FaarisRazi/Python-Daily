@@ -17,7 +17,7 @@ chr_count = lambda text, exclude=[]: len(mreplace(text, exclude)) if exclude els
 
 # Convert a string to in an alternating upper and lower case fashion
 def altercaps(s, capstart=True): 
-    # capstart = True you want to start your string as upper-case, followed then by alternating caps.
+    # capstart = True -> First character as upper-case, followed by alternating caps for the next chrs.
     if startcap:
         return ''.join([chr.upper() if i%2 else chr.lower() for i, chr in enumerate(s, 1)])
     return ''.join([chr.upper() if not i%2 else chr.lower() for i, chr in enumerate(s, 1)])
