@@ -5,7 +5,7 @@ oddeven = lambda x: 'Odd' if int(x)%2 else 'Even'
 
 # Check if the object is Numeric (integer/float)
 def is_number(x, nobool=True):
-    # nobool = True -> To exclude boolean objects as being numeric.
+    # nobool = True -> Exclude boolean objects as valid numeric-types.
     if isinstance(x, (int, float)):
         
         if isinstance(x, bool) and nobool:
