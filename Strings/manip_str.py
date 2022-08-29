@@ -129,7 +129,9 @@ def str_sort(x, by='w', reverse=False):
 # Convert strings to their ordinal form.
 def ordinal(x, as_str=True):
     if as_str:
-        id_list = [ord(i) for i in x if isinstance(i, str)]
+        joiner = as_str if isinstance(as_str, str) else ''
+        id_list = joiner.join([str(ord(i)) for i in x if isinstance(i, str)])
     else:
-        id_list = ''.join([str(ord(i)) for i in x if isinstance(i, str)])
+        id_list = [ord(i) for i in x if isinstance(i, str)]
+        
     return id_list
