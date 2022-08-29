@@ -27,6 +27,7 @@ vector = lambda lst: np.array(lst) # set/dict will be 0-dimensional arrays
 #(Known as "Triangular number": https://en.wikipedia.org/wiki/Triangular_number)
 sumfrom = lambda x, start=0: (x**2 + x)//2 - (start**2 + start)//2
 
+
 # Check if a number is Prime (else it is Composite).
 def is_prime(n):
     # Fastest algorithm from: geekflare.com/prime-number-in-python/
@@ -34,6 +35,7 @@ def is_prime(n):
         if n%i:
             return True
     return False
+
 
 # Lowest Common Multiple (or Least Common Divisor)
 def lcm(numbers):
@@ -63,6 +65,23 @@ def quadratic(a,b,c, show=True, equal1 = False):
     
     return result
  
+
+# Self-made function for summing the digits in a number:
+def sum_digits(x, level=0, count=False): # Only integers are expected, for now...
+    # level = 0 or 1 -> Sum digits until the total is a single-digited number.
+    
+    if isinstance(x, (str,int)):
+        x = str(x)
+        
+    digits = list(map(int, x.strip().split()))
+    
+    return sum(digits)
+    # To be continued...
+    #counts = 0
+    #while len(digits) != 1:
+        #digits = list(map(int, str(sum(digits)) ))
+        #counts += 1
+    
 
 # ---------- Common in Statistics ----------
 # Using Numpy for factorial (instead of recursion or the math library)
