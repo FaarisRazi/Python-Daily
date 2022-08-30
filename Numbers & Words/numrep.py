@@ -64,7 +64,11 @@ def commas(num, r=0):
 
 
 # Convert characters to their alphabetical-numbers (A=1, b=2, c=3 ... z=26):
-# def alpha2num(): # To be continued
+def alpha2num(string):
+    alpha_ids = {s:n for n,s in enumerate('abcdefghijklmnopqrstuvwxyz')}
+    mapped = map(lambda x: alpha_ids.get(x.strip()), string.split())
+    
+    # return mapped in some user's preferred format, TBC...
 
 # Convert numbers to words via digits-to-string mapping,
 # with given IDs-list (str_ids) of string-values to map to your number's digits
