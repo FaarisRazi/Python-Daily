@@ -63,6 +63,9 @@ def commas(num, r=0):
     return f'{num:,}' # Or (Python < 3.6): "{:,}".format(num)
 
 
+# Convert characters to their alphabetical-numbers (A=1, b=2, c=3 ... z=26):
+# def alpha2num(): # To be continued
+
 # Convert numbers to words via digits-to-string mapping,
 # with given IDs-list (str_ids) of string-values to map to your number's digits
 def map_str(x, str_ids = {}, join=''):
