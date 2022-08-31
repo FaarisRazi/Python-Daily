@@ -209,3 +209,8 @@ def rand_basket(items=5, basket=any, nest=0, nest_type=any):
         return dict(random_items)
     else:
         return basket(choice(i) for i in random_items)
+
+class Cast:
+    def __init__(self, datastructure):
+        self.ds = datastructure
+    # Some fancy class for converting datastructures to other datastructures, TBC...
