@@ -115,6 +115,14 @@ def str_shuffle(x, words=True, chrs=False):
     if words:
         shuffle(word_list)
     
+    if chrs:
+        for i in range(len(word_list)):
+            word_letters = word_list[i].split()
+            shuffle(word_letters)
+            word_list[i] = ''.join(word_letters)
+    
+    return ' '.join(word_list)
+    
 
 # Sort a string based on by all characters (or words) alphabetically
 def str_sort(x, by='w', reverse=False):
