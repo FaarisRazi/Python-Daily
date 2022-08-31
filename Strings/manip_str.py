@@ -107,6 +107,14 @@ def randchr(n=len(printable), join=''):
 
     return join.join(chrs)[:n+1]
 
+# Shuffle a string's word-positions and/or each word's characters
+def str_shuffle(x, words=True, chrs=False):
+    
+    word_list = x.split()
+    
+    if words:
+        shuffle(word_list)
+    
 
 # Sort a string based on by all characters (or words) alphabetically
 def str_sort(x, by='w', reverse=False):
