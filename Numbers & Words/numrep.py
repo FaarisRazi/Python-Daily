@@ -7,10 +7,8 @@ oddeven = lambda x: 'Odd' if int(x)%2 else 'Even'
 def is_number(x, nobool=True):
     # nobool = True -> Exclude boolean objects as valid numeric-types.
     if isinstance(x, (int, float)):
-        
         if isinstance(x, bool) and nobool:
             return False
-            
         return True
 
     elif isinstance(x, str):
