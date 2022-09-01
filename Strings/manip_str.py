@@ -1,7 +1,7 @@
 # Handy string-manipulator functions:
 import re
 from string import printable
-from random import shuffle
+from random import shuffle, randint
 
 numbers = printable[:10]
 symbols = printable[62:]
@@ -101,11 +101,9 @@ def paragraphs(text, aslist=False, count=True, exclude=[]):
 
 
 # Get random string of "n" number of characters (or n-sized string)
-def randchr(n=len(printable), join=''):
-    chrs = list(printable)
-    shuffle(chrs)
-
-    return join.join(chrs)[:n+1]
+def randchrs(x=list(printable), n=len(printable), join=''):
+    shuffle(x)
+    return join.join(x)[:n+1]
 
 # Shuffle a string's word-positions and/or each word's characters
 def str_shuffle(x, words=True, chrs=False):
@@ -153,11 +151,15 @@ def ordinal(x, as_str=True):
     return id_list
 
 # Return an encrypted string with it's decription-keys
-def encrypt(x, key_maxlen = 5): # Working on it, TBC...
+def encrypt(x, key_maxlen = 5, key_samelen = False): # Working on it, TBC...
     # key_maxlen = int -> Maximum length (of characters) for a decription-key
-    unique_chrs = set(x)
-    
+
     if key_maxlen > len(printable) or key_maxlen <= 0:
         key_maxlen = len(printable)
     
+    keys = {}
+    for char in set(x):
+        nchars = randint(1, key_maxlen)
+        rand_str = randchr(n = nchars)
+#         keys[char] = 
     
