@@ -151,3 +151,7 @@ def ordinal(x, as_str=True):
         id_list = [ord(i) for i in x if isinstance(i, str)]
         
     return id_list
+
+# Return an encrypted string with it's decription-keys
+# def encrypt(x): # Working on it, TBC...
+    
