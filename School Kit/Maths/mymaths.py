@@ -77,7 +77,6 @@ def sum_digits(x, step=0, count=False): # Only integers are expected, for now...
         
     digits = list(map(int, x.strip().split()))
     
-    # To be continued...
     if count:
         levels = {}
         count = 0
@@ -87,8 +86,12 @@ def sum_digits(x, step=0, count=False): # Only integers are expected, for now...
             x = str(sum(digits))
             digits = list(map(int, x))
             count += 1
+        x = levels
         
-        return levels
+    else:
+        x = sum(digits)
+    
+    return x # To be continued...
     
 
 # ---------- Common in Statistics ----------
