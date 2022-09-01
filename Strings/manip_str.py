@@ -153,5 +153,11 @@ def ordinal(x, as_str=True):
     return id_list
 
 # Return an encrypted string with it's decription-keys
-# def encrypt(x): # Working on it, TBC...
+def encrypt(x, key_maxlen = 5): # Working on it, TBC...
+    # key_maxlen = int -> Maximum length (of characters) for a decription-key
+    unique_chrs = set(x)
+    
+    if key_maxlen > len(printable) or key_maxlen <= 0:
+        key_maxlen = len(printable)
+    
     
