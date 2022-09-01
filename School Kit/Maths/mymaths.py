@@ -67,20 +67,28 @@ def quadratic(a,b,c, show=True, equal1 = False):
  
 
 # Self-made function for summing the digits in a number:
-def sum_digits(x, level=0, count=False): # Only integers are expected, for now...
-    # level = 0 or 1 -> Sum digits until the total is a single-digited number.
+def sum_digits(x, step=0, count=False): # Only integers are expected, for now...
+    # step = n -> Catch the nth level of summed digits, example:
+    # sum_digits(12345, step = 1)  -> 15 (1st summed-level),
+    # sum_digits(12345, step = 2)  -> 6 (2nd summed-level).
     
     if isinstance(x, (str,int)):
         x = str(x)
         
     digits = list(map(int, x.strip().split()))
     
-    return sum(digits)
     # To be continued...
-    #counts = 0
-    #while len(digits) != 1:
-        #digits = list(map(int, str(sum(digits)) ))
-        #counts += 1
+    if count:
+        levels = {}
+        count = 0
+        
+        while len(x) != 1:
+            level[count] = int(x)
+            x = str(sum(digits))
+            digits = list(map(int, x))
+            count += 1
+        
+        return levels
     
 
 # ---------- Common in Statistics ----------
