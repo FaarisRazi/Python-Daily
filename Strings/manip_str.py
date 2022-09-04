@@ -153,6 +153,7 @@ def ordinal(x, as_str=True):
 # Return an encrypted string with it's decription-keys
 def encrypt(x, key_maxlen = 5, key_samelen = False): # Working on it, TBC...
     # key_maxlen = int -> Maximum length (of characters) for a decription-key
+    # Options to return as string or dictionary key (to be worked on InshaAllah)
 
     if key_maxlen > len(printable) or key_maxlen <= 0:
         key_maxlen = len(printable)
@@ -161,5 +162,5 @@ def encrypt(x, key_maxlen = 5, key_samelen = False): # Working on it, TBC...
     for char in set(x):
         nchars = randint(1, key_maxlen)
         rand_str = randchr(n = nchars)
-#         keys[char] = 
+        keys[char] = rand_str
     
