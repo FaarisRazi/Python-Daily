@@ -161,6 +161,6 @@ def encrypt(x, key_maxlen = 5, key_samelen = False): # Working on it, TBC...
     keys = {}
     for char in set(x):
         nchars = randint(1, key_maxlen)
-        rand_str = randchr(n = nchars)
+        rand_str = randchr(n = nchars) # Using the above randchr()
         keys[char] = rand_str
     
