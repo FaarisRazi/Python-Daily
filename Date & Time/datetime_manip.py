@@ -1,3 +1,5 @@
+import datetime, pandas as pd
+
 # See example-file from >  Alhumdulillah/Prayers.ipynb
 def time_diff(time_col, strf, until_next = True, dur=True):
     # strf = '%I:%M %p' (like "2:30 PM").
@@ -24,7 +26,7 @@ def dt_obj(s=0,m=0,h=0,d=0,w=0, mon=0, y=0):
     
     return datetime.timedelta(**non0_params)
 
-# -------- main
+# -------- Adding date-times example:
 main_date_str = pd.to_datetime('Nov 15 2022').strftime("%d-%b-%Y")
 
 main_date = datetime.datetime.strptime(main_date_str, "%d-%b-%Y")
