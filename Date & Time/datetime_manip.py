@@ -37,3 +37,13 @@ add_t = 8
 next_date = (main_date + dt_obj(w=add_t)).strftime("%d-%b-%Y")
 
 print(f'The date {main_date_str}, after {add_t} weeks is: {next_date}\n')
+
+
+# -------- Difference between dates example (in Weeks)
+d1 = datetime.date(2022, 11, 9)
+d2 = datetime.date.today()
+
+d1 -= datetime.timedelta(days=d1.weekday())
+d2 -= datetime.timedelta(days=d2.weekday())
+
+print( 'Weeks:', (d2 - d1).days / 7)
